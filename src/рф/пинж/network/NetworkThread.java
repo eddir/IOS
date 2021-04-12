@@ -31,12 +31,12 @@ public class NetworkThread extends Thread{
             InetSocketAddress socketAddress = (InetSocketAddress)socket.getRemoteSocketAddress();
             String address = ((InetSocketAddress)socketAddress).getAddress().toString().split("/")[1];
 
-            System.out.println("Регистрация клиента.");
+            Server.getLogger().info("Регистрация клиента.");
 
             Client client = new Client(Server.getInstance(), this, address);
             Server.getInstance().addClient(client);
 
-            client.sendMessage("Подключено!");
+            Server.getLogger().debug("Подключено!");
 
             while (Server.getInstance().isRunning()) {
                 CommandPacket packet = new CommandPacket(this.bufferedReader.readLine());
@@ -45,12 +45,12 @@ public class NetworkThread extends Thread{
 
         } catch (IOException e) {
             this.line = this.getName(); //reused String line for getting thread name
-            System.out.println("Ошибка ввода-вывода: клиент " + this.line + " резко оборвал соединение.");
+            Server.getLogger().info("Ошибка ввода-вывода: клиент " + this.line + " резко оборвал соединение.");
 
         } catch (NullPointerException e) {
             e.printStackTrace();
             this.line = this.getName(); //reused String line for getting thread name
-            System.out.println("Клиент " + this.line + " разорвал связь.");
+            Server.getLogger().info("Клиент " + this.line + " разорвал связь.");
 
         } finally {
             Network.closeThread(this);
@@ -59,24 +59,24 @@ public class NetworkThread extends Thread{
 
     public void close() {
         try {
-            System.out.println("Закрытие соединения..");
+            Server.getLogger().debug("Закрытие соединения..");
 
             if (bufferedReader != null) {
                 this.bufferedReader.close();
-                System.out.println("Socket Input Stream закрыт.");
+                Server.getLogger().debug("Socket Input Stream закрыт.");
             }
 
             if (printWriter != null) {
                 this.printWriter.close();
-                System.out.println("Socket Out закрыт.");
+                Server.getLogger().debug("Socket Out закрыт.");
             }
             if (this.socket != null) {
                 this.socket.close();
-                System.out.println("Socket закрыт.");
+                Server.getLogger().debug("Socket закрыт.");
             }
 
         } catch (IOException ie) {
-            System.out.println("Ошибка при закрытии сокета.");
+            Server.getLogger().debug("Ошибка при закрытии сокета.");
         }
     }
 

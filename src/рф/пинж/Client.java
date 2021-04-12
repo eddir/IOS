@@ -28,13 +28,13 @@ public class Client implements CommandSender {
     public void handlePacket(DataPacket packet) {
         if (packet.getPid() == ProtocolInfo.COMMAND_PACKET) {
             CommandPacket commandPacket = (CommandPacket)packet;
-            System.out.println("Принята команда.");
+            Server.getLogger().debug("Принята команда.");
 
             if (!this.getServer().dispatchCommand(this, commandPacket.getCommand())) {
-                this.sendMessage("При выполнении команды что-то пошло не так.");
+                Server.getLogger().debug("При выполнении команды что-то пошло не так.");
             }
         } else {
-            System.out.println("Неизвестный пакет.");
+            Server.getLogger().debug("Неизвестный пакет.");
         }
     }
 

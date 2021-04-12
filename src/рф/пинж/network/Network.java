@@ -21,18 +21,18 @@ public class Network {
 
     public void run() {
         try {
-            System.out.printf("Запуск сервера по адресу %s:%s .%n", this.server.getIp(), this.server.getPort());
+            Server.getLogger().info(String.format("Запуск сервера по адресу %s:%s .%n", this.server.getIp(), this.server.getPort()));
             this.listener = new ServerSocket(this.server.getPort());
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Ошибка сети.");
+            Server.getLogger().error("Ошибка сети.");
             return;
         }
 
         while (this.server.isRunning()) {
             try {
                 Socket socket = this.listener.accept();
-                System.out.println("Соединение установлено.");
+                Server.getLogger().debug("Соединение установлено.");
 
                 NetworkThread networkThread = new NetworkThread(socket);
                 threads.add(networkThread);
@@ -40,7 +40,7 @@ public class Network {
 
             } catch (Exception e) {
                 e.printStackTrace();
-                System.out.println("Ошибка соединения.");
+                Server.getLogger().debug("Ошибка соединения.");
             }
         }
     }

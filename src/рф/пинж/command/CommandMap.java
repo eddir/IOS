@@ -55,7 +55,7 @@ public class CommandMap {
             target.execute(sender, sentCommandLabel, args);
         } catch (Exception e) {
             sender.sendMessage("Произошла непредвиденная ошибка при выполнении команды.");
-            System.out.println("Произошла непредвиденная ошибка при выполнении команды.");
+            Server.getLogger().error("Произошла непредвиденная ошибка при выполнении команды.");
         }
 
         return true;

@@ -3,6 +3,7 @@ package рф.пинж;
 import рф.пинж.command.CommandMap;
 import рф.пинж.command.CommandSender;
 import рф.пинж.network.Network;
+import рф.пинж.utils.MainLogger;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,14 +17,17 @@ public class Server {
     private final String ip;
     private final int port;
 
-    private Set<Client> clients;
+    private final Set<Client> clients;
 
-    private CommandMap commandMap;
+    private final CommandMap commandMap;
+
+    private final MainLogger logger;
 
     private static Server instance;
 
-    public Server(String ip, int port) {
+    public Server(MainLogger logger, String ip, int port) {
         instance = this;
+        this.logger = logger;
 
         this.ip = ip;
         this.port = port;
@@ -59,6 +63,10 @@ public class Server {
 
     public int getPort() {
         return port;
+    }
+
+    public static MainLogger getLogger() {
+        return instance.logger;
     }
 
     public static Server getInstance() {
