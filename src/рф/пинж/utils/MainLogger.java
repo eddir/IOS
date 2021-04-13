@@ -10,6 +10,17 @@ public class MainLogger{
         logger = this;
     }
 
+    public static MainLogger getLogger() {
+        return logger;
+    }
+
+    public void logException(Exception exception) {
+        // Внимание! Не использовать этот метод пока не будет разработана документация к нему.
+        // Используйте `throw new Exception()` взамен.
+        this.error("Произошла неизвестная ошибка.");
+        exception.printStackTrace();
+    }
+
     public void emergency(String message) {
         this.send(ConsoleColors.YELLOW + "[EMERGENCY] " + message + ConsoleColors.RESET);
     }
@@ -35,11 +46,11 @@ public class MainLogger{
     }
 
     public void info(String message) {
-        this.send(ConsoleColors.BLACK + "[INFO] " + message + ConsoleColors.RESET);
+        this.send(ConsoleColors.BLACK_BRIGHT + "[INFO] " + message + ConsoleColors.RESET);
     }
 
     public void debug(String message) {
-        this.send(ConsoleColors.BLACK + "[DEBUG] " + message + ConsoleColors.RESET);
+        this.send(ConsoleColors.BLACK_BRIGHT + "[DEBUG] " + message + ConsoleColors.RESET);
     }
 
     public void send(String message) {

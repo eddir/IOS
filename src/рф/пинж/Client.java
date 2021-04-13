@@ -19,10 +19,11 @@ public class Client implements CommandSender {
         this.server = server;
         this.thread = thread;
         this.ip = ip;
+        this.sendMessage("Соединение установлено. Введите help для помощи.");
     }
 
     public void sendMessage(String message) {
-        this.thread.send(message + "\n");
+        this.thread.send(message);
     }
 
     public void handlePacket(DataPacket packet) {

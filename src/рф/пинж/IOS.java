@@ -2,9 +2,13 @@ package рф.пинж;
 
 import рф.пинж.utils.MainLogger;
 
+import java.io.File;
+
 public class IOS {
 
     public static String version = "1.0";
+
+    public final static String PATH = System.getProperty("user.dir") + File.separator;
 
     public static void main(String[] args) {
         try {

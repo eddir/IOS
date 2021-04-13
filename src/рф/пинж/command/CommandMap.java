@@ -2,6 +2,7 @@ package рф.пинж.command;
 
 import рф.пинж.Server;
 import рф.пинж.command.defaults.VersionCommand;
+import рф.пинж.command.defaults.forum.TopicCommand;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ public class CommandMap {
 
     public void setDefaultCommands() {
         this.register(new VersionCommand());
+        this.register(new TopicCommand());
     }
 
     public void register(Command command) {
