@@ -1,12 +1,10 @@
-package рф.пинж;
+package рф.пинж.ios;
 
-import рф.пинж.command.CommandSender;
-import рф.пинж.network.NetworkThread;
-import рф.пинж.network.protocol.CommandPacket;
-import рф.пинж.network.protocol.DataPacket;
-import рф.пинж.network.protocol.ProtocolInfo;
-
-import java.net.InetSocketAddress;
+import рф.пинж.ios.command.CommandSender;
+import рф.пинж.ios.network.NetworkThread;
+import рф.пинж.ios.network.protocol.CommandPacket;
+import рф.пинж.ios.network.protocol.DataPacket;
+import рф.пинж.ios.network.protocol.ProtocolInfo;
 
 public class Client implements CommandSender {
     // Я бы назвал этот класс User, но это имя зарезрервировано под модуль пользоваля.

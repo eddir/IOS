@@ -1,4 +1,4 @@
-package рф.пинж.network.protocol;
+package рф.пинж.ios.network.protocol;
 
 public class CommandPacket extends DataPacket{
     private byte pid = ProtocolInfo.COMMAND_PACKET;

@@ -1,4 +1,4 @@
-package рф.пинж;
+package рф.пинж.ios;
 
 import java.util.List;
 

@@ -1,13 +1,13 @@
-package рф.пинж;
+package рф.пинж.ios;
 
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
-import рф.пинж.command.CommandMap;
-import рф.пинж.command.CommandSender;
-import рф.пинж.network.Network;
-import рф.пинж.utils.Config;
-import рф.пинж.utils.MainLogger;
+import рф.пинж.ios.command.CommandMap;
+import рф.пинж.ios.command.CommandSender;
+import рф.пинж.ios.network.Network;
+import рф.пинж.ios.utils.Config;
+import рф.пинж.ios.utils.MainLogger;
 
 import java.io.FileNotFoundException;
 import java.util.HashSet;

@@ -1,4 +1,4 @@
-package рф.пинж.utils;
+package рф.пинж.ios.utils;
 
 import java.io.*;
 import java.lang.management.ManagementFactory;

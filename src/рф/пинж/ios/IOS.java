@@ -1,6 +1,6 @@
-package рф.пинж;
+package рф.пинж.ios;
 
-import рф.пинж.utils.MainLogger;
+import рф.пинж.ios.utils.MainLogger;
 
 import java.io.File;
 

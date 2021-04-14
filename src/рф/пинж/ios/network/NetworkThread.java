@@ -1,14 +1,13 @@
-package рф.пинж.network;
+package рф.пинж.ios.network;
 
-import рф.пинж.Client;
-import рф.пинж.Server;
-import рф.пинж.network.protocol.CommandPacket;
+import рф.пинж.ios.Client;
+import рф.пинж.ios.Server;
+import рф.пинж.ios.network.protocol.CommandPacket;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 

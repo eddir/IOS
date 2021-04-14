@@ -1,4 +1,4 @@
-package рф.пинж.command;
+package рф.пинж.ios.command;
 
 public abstract class Command {
 

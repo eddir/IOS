@@ -1,6 +1,6 @@
-package рф.пинж.command;
+package рф.пинж.ios.command;
 
-import рф.пинж.Server;
+import рф.пинж.ios.Server;
 
 public interface CommandSender {
     void sendMessage(String message);

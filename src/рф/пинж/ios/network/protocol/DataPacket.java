@@ -1,4 +1,4 @@
-package рф.пинж.network.protocol;
+package рф.пинж.ios.network.protocol;
 
 public class DataPacket {
     private byte pid;

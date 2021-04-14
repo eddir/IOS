@@ -1,8 +1,8 @@
-package рф.пинж.command.defaults;
+package рф.пинж.ios.command.defaults;
 
-import рф.пинж.IOS;
-import рф.пинж.command.Command;
-import рф.пинж.command.CommandSender;
+import рф.пинж.ios.IOS;
+import рф.пинж.ios.command.Command;
+import рф.пинж.ios.command.CommandSender;
 
 public class VersionCommand extends Command {
     public VersionCommand() {

@@ -1,6 +1,6 @@
-package рф.пинж.utils;
+package рф.пинж.ios.utils;
 
-import рф.пинж.IOS;
+import рф.пинж.ios.IOS;
 
 import java.io.File;
 import java.io.FileNotFoundException;

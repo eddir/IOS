@@ -1,8 +1,8 @@
-package рф.пинж.command.defaults.forum;
+package рф.пинж.ios.command.defaults.forum;
 
-import рф.пинж.command.Command;
-import рф.пинж.command.CommandSender;
-import рф.пинж.prototype.forum.Topic;
+import рф.пинж.ios.command.Command;
+import рф.пинж.ios.command.CommandSender;
+import рф.пинж.ios.prototype.forum.Topic;
 
 import java.util.List;
 

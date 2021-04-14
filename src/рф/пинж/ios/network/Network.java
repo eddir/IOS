@@ -1,6 +1,6 @@
-package рф.пинж.network;
+package рф.пинж.ios.network;
 
-import рф.пинж.Server;
+import рф.пинж.ios.Server;
 
 import java.io.*;
 import java.net.ServerSocket;

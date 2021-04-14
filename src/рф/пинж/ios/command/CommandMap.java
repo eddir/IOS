@@ -1,8 +1,8 @@
-package рф.пинж.command;
+package рф.пинж.ios.command;
 
-import рф.пинж.Server;
-import рф.пинж.command.defaults.VersionCommand;
-import рф.пинж.command.defaults.forum.TopicCommand;
+import рф.пинж.ios.Server;
+import рф.пинж.ios.command.defaults.VersionCommand;
+import рф.пинж.ios.command.defaults.forum.TopicCommand;
 
 import java.util.ArrayList;
 import java.util.HashMap;

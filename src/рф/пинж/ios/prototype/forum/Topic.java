@@ -1,10 +1,10 @@
-package рф.пинж.prototype.forum;
+package рф.пинж.ios.prototype.forum;
 
 import org.sql2o.Query;
 import org.sql2o.Sql2oException;
-import рф.пинж.Model;
-import рф.пинж.Server;
-import рф.пинж.utils.MainLogger;
+import рф.пинж.ios.Model;
+import рф.пинж.ios.Server;
+import рф.пинж.ios.utils.MainLogger;
 
 import java.util.List;
 
