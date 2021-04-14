@@ -1,6 +1,7 @@
 package рф.пинж.ios.command;
 
 import рф.пинж.ios.Server;
+import рф.пинж.ios.command.defaults.HelpCommand;
 import рф.пинж.ios.command.defaults.VersionCommand;
 import рф.пинж.ios.command.defaults.forum.TopicCommand;
 
@@ -22,6 +23,7 @@ public class CommandMap {
     public void setDefaultCommands() {
         this.register(new VersionCommand());
         this.register(new TopicCommand());
+        this.register(new HelpCommand());
     }
 
     public void register(Command command) {
