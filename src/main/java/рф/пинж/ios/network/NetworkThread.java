@@ -3,6 +3,8 @@ package рф.пинж.ios.network;
 import рф.пинж.ios.Client;
 import рф.пинж.ios.Server;
 import рф.пинж.ios.network.protocol.CommandPacket;
+import рф.пинж.ios.network.protocol.DataPacket;
+import рф.пинж.ios.network.protocol.ViewPacket;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,7 +13,7 @@ import java.io.PrintWriter;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
-public class NetworkThread extends Thread{
+public class NetworkThread extends Thread {
     private Socket socket;
 
     private String line;
@@ -27,8 +29,8 @@ public class NetworkThread extends Thread{
             this.bufferedReader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
             this.printWriter = new PrintWriter(this.socket.getOutputStream());
 
-            InetSocketAddress socketAddress = (InetSocketAddress)socket.getRemoteSocketAddress();
-            String address = ((InetSocketAddress)socketAddress).getAddress().toString().split("/")[1];
+            InetSocketAddress socketAddress = (InetSocketAddress) socket.getRemoteSocketAddress();
+            String address = ((InetSocketAddress) socketAddress).getAddress().toString().split("/")[1];
 
             Server.getLogger().info("Регистрация клиента.");
 
@@ -38,7 +40,13 @@ public class NetworkThread extends Thread{
             Server.getLogger().debug("Подключено!");
 
             while (Server.getInstance().isRunning()) {
-                CommandPacket packet = new CommandPacket(this.bufferedReader.readLine());
+                String input = this.bufferedReader.readLine();
+                DataPacket packet;
+                if (input.startsWith("/")) {
+                    packet = new CommandPacket(input.substring(1));
+                } else {
+                    packet = new ViewPacket(input);
+                }
                 client.handlePacket(packet);
             }
 
@@ -81,6 +89,16 @@ public class NetworkThread extends Thread{
 
     public void send(String line) {
         printWriter.println(line);
+        printWriter.flush();
+    }
+
+    /**
+     * Очищает консоль и выводит заданный текст
+     * @param text текст для вывода
+     */
+    public void show(String text) {
+        printWriter.print("\u001B[2J");
+        printWriter.print(text);
         printWriter.flush();
     }
 }
