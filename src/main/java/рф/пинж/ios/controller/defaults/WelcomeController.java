@@ -21,15 +21,15 @@ public class WelcomeController extends Controller {
 
     @URL("index")
     public void index(CommandSender sender, String request) {
-        //sender.sendView(view);
-        sender.sendView(new Menu(new LinkedHashMap<>() {
-            {
-                put("Авторизация", new WelcomeAction("авторизация"));
-                put("Помощь", new CommandAction("help"));
-                put("Топик", new ViewAction("forum/topic/first"));
-                put("Выход", new WelcomeAction("выход"));
-            }
-        }));
+        sender.sendView(view);
+//        sender.sendView(new Menu(new LinkedHashMap<>() {
+//            {
+//                put("Авторизация", new WelcomeAction("авторизация"));
+//                put("Помощь", new CommandAction("help"));
+//                put("Топик", new ViewAction("forum/topic/first"));
+//                put("Выход", new WelcomeAction("выход"));
+//            }
+//        }));
     }
 
     record WelcomeAction(String message) implements Action {
