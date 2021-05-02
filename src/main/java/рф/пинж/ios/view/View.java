@@ -1,7 +1,6 @@
 package рф.пинж.ios.view;
 
 import рф.пинж.ios.model.IModel;
-import рф.пинж.ios.controller.Controller;
 
 public class View {
 

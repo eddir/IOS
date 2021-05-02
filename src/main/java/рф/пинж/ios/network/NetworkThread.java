@@ -4,6 +4,7 @@ import рф.пинж.ios.Client;
 import рф.пинж.ios.Server;
 import рф.пинж.ios.network.protocol.CommandPacket;
 import рф.пинж.ios.network.protocol.DataPacket;
+import рф.пинж.ios.network.protocol.MenuPacket;
 import рф.пинж.ios.network.protocol.ViewPacket;
 
 import java.io.BufferedReader;
@@ -42,10 +43,14 @@ public class NetworkThread extends Thread {
             while (Server.getInstance().isRunning()) {
                 String input = this.bufferedReader.readLine();
                 DataPacket packet;
-                if (input.startsWith("/")) {
-                    packet = new CommandPacket(input.substring(1));
+                if (client.getAction().equals("!interface")) {
+                    packet = new MenuPacket(input);
                 } else {
-                    packet = new ViewPacket(input);
+                    if (input.startsWith("/")) {
+                        packet = new CommandPacket(input.substring(1));
+                    } else {
+                        packet = new ViewPacket(input);
+                    }
                 }
                 client.handlePacket(packet);
             }

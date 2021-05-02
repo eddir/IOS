@@ -1,4 +1,4 @@
-package рф.пинж.ios.view.forum;
+package рф.пинж.ios.view.defaults.forum;
 
 import рф.пинж.ios.model.prototype.forum.Topic;
 import рф.пинж.ios.view.View;
@@ -10,6 +10,6 @@ public class TopicView extends View {
     }
 
     public String prepare() {
-        return ((Topic)this.model).getTitle();
+        return ((Topic)this.model).getTitle() + "\r\n";
     }
 }

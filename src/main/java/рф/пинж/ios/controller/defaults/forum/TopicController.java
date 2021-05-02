@@ -1,10 +1,10 @@
-package рф.пинж.ios.controller.forum;
+package рф.пинж.ios.controller.defaults.forum;
 
 import рф.пинж.ios.command.CommandSender;
 import рф.пинж.ios.controller.Controller;
 import рф.пинж.ios.controller.URL;
 import рф.пинж.ios.repository.forum.TopicRepository;
-import рф.пинж.ios.view.forum.TopicView;
+import рф.пинж.ios.view.defaults.forum.TopicView;
 
 import java.lang.reflect.InvocationTargetException;
 

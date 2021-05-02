@@ -1,6 +1,8 @@
-package рф.пинж.ios.view;
+package рф.пинж.ios.view.defaults.forum;
 
-public class WelcomeView extends View{
+import рф.пинж.ios.view.View;
+
+public class WelcomeView extends View {
     public WelcomeView() {
         super(null);
     }

@@ -88,7 +88,7 @@ public class Server {
     public boolean dispatchView(CommandSender sender, String url) {
         try {
             // Парсинг url
-            // Пример: forum/topic?do=show
+            // Пример: forum/topic/first
 
             // Две части адреса - путь и параметры
             String[] parts;
@@ -123,21 +123,21 @@ public class Server {
                 }
             }
 
-            Class<?> c = Class.forName("рф.пинж.ios.controller." + controllerPath);
+            Class<?> c = Class.forName("рф.пинж.ios.controller.defaults." + controllerPath);
             Controller controller = (Controller) c.getDeclaredConstructor().newInstance();
 
             for (Method method : controller.getClass().getMethods()) {
                 if (method.isAnnotationPresent(URL.class)) {
                     if(method.getAnnotation(URL.class).value().equals(action)) {
+                        sender.setAction(url);
                         method.invoke(controller, sender, args.get("do"));
-                        break;
+                        return true;
                     }
                 }
             }
-
-            sender.setAction(url);
-            return true;
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            return false;
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | IndexOutOfBoundsException e) {
+            MainLogger.getLogger().error("Не удалось определить ссылку " + url);
             e.printStackTrace();
         }
         return false;
