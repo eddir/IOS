@@ -1,15 +1,15 @@
 package рф.пинж.ios.controller;
 
-import рф.пинж.ios.model.Model;
+import рф.пинж.ios.model.IModel;
 import рф.пинж.ios.view.View;
 
 public abstract class Controller {
 
-    protected Model model;
+    protected IModel model;
 
     protected View view;
 
-    public Controller(Model model, View view) {
+    public Controller(IModel model, View view) {
         this.model = model;
         this.view = view;
     }

@@ -1,10 +1,16 @@
 package рф.пинж.ios.model.prototype.forum;
 
+import рф.пинж.ios.model.IModel;
 import рф.пинж.ios.model.Model;
 
-public class Topic implements Model {
+import java.util.List;
 
-    private int id;
+public class Topic extends Model implements IModel {
+
+    {
+        super.table = "topics";
+        super.columns = List.of("id", "title", "created_at");
+    }
 
     private String title;
 

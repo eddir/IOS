@@ -4,10 +4,18 @@ import org.sql2o.Query;
 import org.sql2o.Sql2oException;
 import рф.пинж.ios.Server;
 import рф.пинж.ios.model.prototype.forum.Topic;
+import рф.пинж.ios.repository.IRepository;
 import рф.пинж.ios.repository.Repository;
 import рф.пинж.ios.utils.MainLogger;
 
-public class TopicRepository extends Repository {
+import java.lang.reflect.InvocationTargetException;
+
+public class TopicRepository extends Repository<Topic> implements IRepository<Topic> {
+
+    //todo: что-то сделать с этими исключениями
+    public TopicRepository() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        super(Topic.class);
+    }
 
     public static Topic getFirst() {
         try {
@@ -18,5 +26,4 @@ public class TopicRepository extends Repository {
             return null;
         }
     }
-
 }
