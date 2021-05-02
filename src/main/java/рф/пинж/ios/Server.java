@@ -5,19 +5,23 @@ import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 import рф.пинж.ios.command.CommandMap;
 import рф.пинж.ios.command.CommandSender;
+import рф.пинж.ios.controller.Controller;
+import рф.пинж.ios.controller.URL;
 import рф.пинж.ios.network.Network;
 import рф.пинж.ios.utils.Config;
 import рф.пинж.ios.utils.MainLogger;
 
 import java.io.FileNotFoundException;
-import java.util.HashSet;
-import java.util.Set;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.*;
 
 public class Server {
 
+    // Показывает запущен ли сервер в данный момент
     private boolean isRunning = true;
 
-    private Network network;
+    private final Network network;
 
     private final String ip;
     private final int port;
@@ -30,7 +34,7 @@ public class Server {
 
     private static Server instance;
 
-    private Config config;
+    private final Config config;
 
     private Connection database;
 
@@ -41,7 +45,7 @@ public class Server {
         this.ip = ip;
         this.port = port;
 
-        this.clients = new HashSet<Client>();
+        this.clients = new HashSet<>();
 
         this.commandMap = new CommandMap(this);
 
@@ -81,8 +85,67 @@ public class Server {
         return false;
     }
 
+    public boolean dispatchView(CommandSender sender, String url) {
+        try {
+            // Парсинг url
+            // Пример: forum/topic/first
+
+            // Две части адреса - путь и параметры
+            String[] parts;
+            // Путь до метода у контроллера
+            List<String> path;
+            // Путь до класса контроллера
+            String controllerPath;
+            // Метод у контроллера
+            String action;
+            // Аргументы передаются методу контроллера
+            Map<String, String> args = new HashMap<>();
+
+            parts = url.split("\\?");
+            path = Arrays.asList(parts[0].split("/"));
+
+            List<String> controllerNamespace = path.subList(0, path.size() - 1);
+            String cc = controllerNamespace.get(controllerNamespace.size() - 1);
+            cc = cc.substring(0, 1).toUpperCase() + cc.substring(1) + "Controller";
+
+            controllerPath = String.join(".", controllerNamespace.subList(0, controllerNamespace.size() - 1));
+            if (controllerPath.length() > 0) {
+                controllerPath += '.';
+            }
+            controllerPath += cc;
+
+            action = path.get(path.size() - 1);
+
+            if (parts.length == 2) {
+                for (String arg : parts[1].split("&")) {
+                    String[] combination = arg.split("=");
+                    args.put(combination[0], combination[1]);
+                }
+            }
+
+            Class<?> c = Class.forName("рф.пинж.ios.controller.defaults." + controllerPath);
+            Controller controller = (Controller) c.getDeclaredConstructor().newInstance();
+
+            for (Method method : controller.getClass().getMethods()) {
+                if (method.isAnnotationPresent(URL.class)) {
+                    if(method.getAnnotation(URL.class).value().equals(action)) {
+                        sender.setAction(url);
+                        method.invoke(controller, sender, args.get("do"));
+                        return true;
+                    }
+                }
+            }
+            return false;
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | IndexOutOfBoundsException e) {
+            MainLogger.getLogger().error("Не удалось определить ссылку " + url);
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public void addClient(Client client) {
         this.clients.add(client);
+        this.dispatchView(client, "welcome/index");
     }
 
     public void crash(String message) {

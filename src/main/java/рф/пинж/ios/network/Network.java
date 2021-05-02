@@ -10,10 +10,10 @@ import java.util.Set;
 
 public class Network {
 
-    private Server server;
+    private final Server server;
 
     private ServerSocket listener;
-    private static Set<NetworkThread> threads = new HashSet<>();
+    private static final Set<NetworkThread> threads = new HashSet<>();
 
     public Network(Server server) {
         this.server = server;

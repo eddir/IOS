@@ -8,6 +8,7 @@ public class IOS {
 
     public static String version = "1.1.0";
 
+    // Путь до дирректории сервера
     public final static String PATH = System.getProperty("user.dir") + File.separator;
 
     public static void main(String[] args) {
