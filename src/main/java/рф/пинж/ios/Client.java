@@ -1,7 +1,6 @@
 package рф.пинж.ios;
 
 import рф.пинж.ios.command.CommandSender;
-import рф.пинж.ios.controller.Controller;
 import рф.пинж.ios.network.NetworkThread;
 import рф.пинж.ios.network.protocol.CommandPacket;
 import рф.пинж.ios.network.protocol.DataPacket;
@@ -15,12 +14,12 @@ import java.util.Map;
 public class Client implements CommandSender {
     // Я бы назвал этот класс User, но это имя зарезрервировано под модуль пользоваля.
 
-    private NetworkThread thread;
-    private String ip;
-    private Server server;
+    private final NetworkThread thread;
+    private final String ip;
+    private final Server server;
 
     private String action;
-    private Map<String, String> session = new HashMap<String, String>();
+    private final Map<String, String> session = new HashMap<>();
 
     public Client(Server server, NetworkThread thread, String ip) {
         this.server = server;

@@ -13,7 +13,7 @@ public class CommandMap {
 
     protected final Map<String, Command> commands = new HashMap<>();
 
-    Server server;
+    final Server server;
 
     public CommandMap(Server server) {
         this.server = server;

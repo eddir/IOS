@@ -1,29 +1,25 @@
 package рф.пинж.ios.view;
 
-import рф.пинж.ios.model.Model;
+import рф.пинж.ios.model.IModel;
 import рф.пинж.ios.controller.Controller;
 
 public class View {
 
-    protected Model model;
+    protected IModel model;
 
-    public View(Model model) {
+    public View(IModel model) {
         this.model = model;
-    }
-
-    public void registerListener(Controller controller) {
-
     }
 
     public String prepare() {
         return "Содержимое окна не установлено";
     }
 
-    public Model getModel() {
+    public IModel getModel() {
         return model;
     }
 
-    public void setModel(Model model) {
+    public void setModel(IModel model) {
         this.model = model;
     }
 }

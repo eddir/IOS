@@ -14,7 +14,6 @@ import рф.пинж.ios.utils.MainLogger;
 import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.net.MalformedURLException;
 import java.util.*;
 
 public class Server {
@@ -22,7 +21,7 @@ public class Server {
     // Показывает запущен ли сервер в данный момент
     private boolean isRunning = true;
 
-    private Network network;
+    private final Network network;
 
     private final String ip;
     private final int port;
@@ -35,7 +34,7 @@ public class Server {
 
     private static Server instance;
 
-    private Config config;
+    private final Config config;
 
     private Connection database;
 
@@ -46,7 +45,7 @@ public class Server {
         this.ip = ip;
         this.port = port;
 
-        this.clients = new HashSet<Client>();
+        this.clients = new HashSet<>();
 
         this.commandMap = new CommandMap(this);
 
@@ -100,7 +99,7 @@ public class Server {
             // Метод у контроллера
             String action;
             // Аргументы передаются методу контроллера
-            Map<String, String> args = new HashMap<String, String>();
+            Map<String, String> args = new HashMap<>();
 
             parts = url.split("\\?");
             path = Arrays.asList(parts[0].split("/"));

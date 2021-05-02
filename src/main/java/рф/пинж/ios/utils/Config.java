@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class Config {
 
-    private HashMap<String, String> properties = new HashMap<String, String>();
+    private final HashMap<String, String> properties = new HashMap<>();
 
     private static String CONFIG_PATH;
 
@@ -33,7 +33,7 @@ public class Config {
 
     public void parseProperties(String content) {
         for (String line : content.split("\n")) {
-            if (Pattern.compile("[a-zA-Z0-9\\-_\\.]*+=+[^\\r\\n]*").matcher(line).matches()) {
+            if (Pattern.compile("[a-zA-Z0-9\\-_.]*+=+[^\\r\\n]*").matcher(line).matches()) {
                 String[] b = line.split("=", -1);
                 this.properties.put(b[0], b[1].trim());
             }

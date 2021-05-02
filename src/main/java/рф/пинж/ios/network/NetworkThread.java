@@ -14,7 +14,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 
 public class NetworkThread extends Thread {
-    private Socket socket;
+    private final Socket socket;
 
     private String line;
     private BufferedReader bufferedReader;
@@ -30,7 +30,7 @@ public class NetworkThread extends Thread {
             this.printWriter = new PrintWriter(this.socket.getOutputStream());
 
             InetSocketAddress socketAddress = (InetSocketAddress) socket.getRemoteSocketAddress();
-            String address = ((InetSocketAddress) socketAddress).getAddress().toString().split("/")[1];
+            String address = socketAddress.getAddress().toString().split("/")[1];
 
             Server.getLogger().info("Регистрация клиента.");
 

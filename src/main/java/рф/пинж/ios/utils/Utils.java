@@ -3,6 +3,7 @@ package рф.пинж.ios.utils;
 import java.io.*;
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadInfo;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.channels.FileChannel;
@@ -166,7 +167,7 @@ public class Utils {
         long result = (int) r & 0xff;
         result |= ((int) g & 0xff) << 8;
         result |= ((int) b & 0xff) << 16;
-        result |= ((int) a & 0xff) << 24;
+        result |= (long) ((int) a & 0xff) << 24;
         return result & 0xFFFFFFFFL;
     }
 
@@ -226,7 +227,7 @@ public class Utils {
     public static <T,U,V> Map<U,V> getOrCreate(Map<T, Map<U, V>> map, T key) {
         Map<U, V> existing = map.get(key);
         if (existing == null) {
-            ConcurrentHashMap<U, V> toPut = new ConcurrentHashMap<U, V>();
+            ConcurrentHashMap<U, V> toPut = new ConcurrentHashMap<>();
             existing = map.putIfAbsent(key, toPut);
             if (existing == null) {
                 existing = toPut;
@@ -241,13 +242,10 @@ public class Utils {
             return existing;
         }
         try {
-            U toPut = clazz.newInstance();
+            U toPut = clazz.getDeclaredConstructor().newInstance();
             existing = map.putIfAbsent(key, toPut);
-            if (existing == null) {
-                return toPut;
-            }
-            return existing;
-        } catch (InstantiationException | IllegalAccessException e) {
+            return Objects.requireNonNullElse(existing, toPut);
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }
     }
@@ -288,14 +286,14 @@ public class Utils {
         return -1;
     }
 
-    public static Map<String, List<String>> splitQuery(URL url) throws UnsupportedEncodingException {
-        final Map<String, List<String>> query_pairs = new LinkedHashMap<String, List<String>>();
+    public static Map<String, List<String>> splitQuery(URL url) {
+        final Map<String, List<String>> query_pairs = new LinkedHashMap<>();
         final String[] pairs = url.getQuery().split("&");
         for (String pair : pairs) {
             final int idx = pair.indexOf("=");
             final String key = idx > 0 ? URLDecoder.decode(pair.substring(0, idx), StandardCharsets.UTF_8) : pair;
             if (!query_pairs.containsKey(key)) {
-                query_pairs.put(key, new LinkedList<String>());
+                query_pairs.put(key, new LinkedList<>());
             }
             final String value = idx > 0 && pair.length() > idx + 1 ? URLDecoder.decode(pair.substring(idx + 1), StandardCharsets.UTF_8) : null;
             query_pairs.get(key).add(value);
