@@ -25,6 +25,10 @@ public abstract class Repository<T extends IModel> implements IRepository<T> {
         this.model = (Model) type.getDeclaredConstructor().newInstance();
     }
 
+    public Model getModel() {
+        return model;
+    }
+
     public T get(int id) {
         return Server.getInstance().getDatabase().createQuery("SELECT * FROM " + model.getTable() + " WHERE id=:id")
                 .addParameter("id", id)

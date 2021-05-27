@@ -15,6 +15,7 @@ public class HelpCommand extends Command {
     @Override
     public boolean execute(CommandSender sender, String commandLabel, String[] args) {
         sender.sendMessage("version - узнать версию сервера.");
+        sender.sendMessage("institutes - вывести список институов.");
         return true;
     }
 }
