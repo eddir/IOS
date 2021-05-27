@@ -1,6 +1,7 @@
 package рф.пинж.ios;
 
 import рф.пинж.ios.command.CommandSender;
+import рф.пинж.ios.model.prototype.users.User;
 import рф.пинж.ios.network.NetworkThread;
 import рф.пинж.ios.network.protocol.*;
 import рф.пинж.ios.view.View;
@@ -15,6 +16,9 @@ public class Client implements CommandSender {
     private final NetworkThread thread;
     private final String ip;
     private final Server server;
+
+    private boolean isAuthorized = false;
+    private User user;
 
     private String action;
     private Interface currentInterface;
@@ -84,5 +88,16 @@ public class Client implements CommandSender {
 
     public String getIp() {
         return ip;
+    }
+
+
+    @Override
+    public User getUser() {
+        return user;
+    }
+
+    @Override
+    public void setUser(User user) {
+        this.user = user;
     }
 }

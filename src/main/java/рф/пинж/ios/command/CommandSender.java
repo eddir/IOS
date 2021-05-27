@@ -1,6 +1,7 @@
 package рф.пинж.ios.command;
 
 import рф.пинж.ios.Server;
+import рф.пинж.ios.model.prototype.users.User;
 import рф.пинж.ios.view.View;
 
 public interface CommandSender {
@@ -21,4 +22,8 @@ public interface CommandSender {
     Server getServer();
 
     boolean isClient();
+
+    User getUser();
+
+    void setUser(User user);
 }

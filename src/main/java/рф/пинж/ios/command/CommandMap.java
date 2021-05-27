@@ -4,6 +4,9 @@ import рф.пинж.ios.Server;
 import рф.пинж.ios.command.defaults.HelpCommand;
 import рф.пинж.ios.command.defaults.VersionCommand;
 import рф.пинж.ios.command.defaults.forum.TopicCommand;
+import рф.пинж.ios.command.defaults.users.AuthComand;
+import рф.пинж.ios.command.defaults.users.QuitCommand;
+import рф.пинж.ios.command.defaults.users.RestorePasswordCommand;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +27,9 @@ public class CommandMap {
         this.register(new VersionCommand());
         this.register(new TopicCommand());
         this.register(new HelpCommand());
+        this.register(new AuthComand());
+        this.register(new QuitCommand());
+        this.register(new RestorePasswordCommand());
     }
 
     public void register(Command command) {
