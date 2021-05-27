@@ -24,6 +24,7 @@ public class CommandMap {
         this.register(new VersionCommand());
         this.register(new TopicCommand());
         this.register(new HelpCommand());
+        this.register(new manipulEduPlan());
     }
 
     public void register(Command command) {
