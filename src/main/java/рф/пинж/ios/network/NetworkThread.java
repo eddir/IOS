@@ -52,7 +52,7 @@ public class NetworkThread extends Thread {
                 if (client.getAction().equals("!interface")) {
                     packet = new MenuPacket(input);
                 } else {
-                    if (input.startsWith("/")) {
+                    if (input.length() != 0 && input.startsWith("/")) {
                         packet = new CommandPacket(input.substring(1));
                     } else {
                         packet = new ViewPacket(input);
