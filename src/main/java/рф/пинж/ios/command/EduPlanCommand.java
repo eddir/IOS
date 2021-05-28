@@ -2,8 +2,8 @@ package рф.пинж.ios.command;
 
 import рф.пинж.ios.repository.Anton.EduPlanRepository;
 
-public class manipulEduPlan extends Command{
-    public manipulEduPlan(){
+public class EduPlanCommand extends Command{
+    public EduPlanCommand(){
         super("eduPlan");
     }
 

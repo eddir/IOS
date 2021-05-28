@@ -1,7 +1,9 @@
 package рф.пинж.ios.command;
 
 import рф.пинж.ios.Server;
+import рф.пинж.ios.command.defaults.AddSubjectInEduPlanCommand;
 import рф.пинж.ios.command.defaults.HelpCommand;
+import рф.пинж.ios.command.defaults.ShowAllSubInEduPlanCommand;
 import рф.пинж.ios.command.defaults.VersionCommand;
 import рф.пинж.ios.command.defaults.forum.TopicCommand;
 
@@ -24,7 +26,10 @@ public class CommandMap {
         this.register(new VersionCommand());
         this.register(new TopicCommand());
         this.register(new HelpCommand());
-        this.register(new manipulEduPlan());
+        this.register(new EduPlanCommand());
+        this.register(new SubjectCommand());
+        this.register(new AddSubjectInEduPlanCommand());
+        this.register(new ShowAllSubInEduPlanCommand());
     }
 
     public void register(Command command) {
