@@ -1,6 +1,7 @@
 package рф.пинж.ios.command;
 
 import org.sql2o.Sql2oException;
+import рф.пинж.ios.repository.Anton.SubjectRepository;
 import рф.пинж.ios.utils.MainLogger;
 
 public class SubjectCommand extends Command{
@@ -13,6 +14,14 @@ public class SubjectCommand extends Command{
         try{
             switch (args[0]){
                 case "create":
+                    if(args.length == 3)
+                        SubjectRepository.createANDaddToEduPlan(args[1],Integer.parseInt(args[2]));
+                    else if (args.length == 2) {
+                        SubjectRepository.create(args[1]);
+                    }
+                    break;
+                case "delete":
+                    SubjectRepository.deleteById(Integer.parseInt(args[1]));
                     break;
             }
         }

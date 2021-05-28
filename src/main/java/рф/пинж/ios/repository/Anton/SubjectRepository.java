@@ -13,8 +13,25 @@ public class SubjectRepository extends Repository<Subject> implements IRepositor
     public SubjectRepository() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         super(Subject.class);
     }
-    public static void create(int id,String description){
-        Query query2 = Server.getInstance().getDatabase().createQuery("INSERT INTO subject VALUES(" + id + ",\"" + description + "\"");
-        query2.executeBatch();
+    //description , idProfil
+    //Создание Subject только в таблице subject
+    public static void create(String description){
+        Query query2 = Server.getInstance().getDatabase().createQuery("INSERT INTO subject (description) VALUES(" + "\"" + description + "\")");
+        //Query query = Server.getInstance().getDatabase().createQuery("INSERT INTO subject (description,idProfil) VALUES (\"test06\",15)");
+        //Long keyIdSub = query2.executeUpdate().getKey(Long.class);
+        query2.executeUpdate();
+    }
+    //Создание Subject в таблице subject и связать предмет с учебным планом
+    public static void createANDaddToEduPlan(String description,int idPlan){
+        Query query2 = Server.getInstance().getDatabase().createQuery("INSERT INTO subject (description) VALUES(" + "\"" + description + "\")");
+        //Query query = Server.getInstance().getDatabase().createQuery("INSERT INTO subject (description,idProfil) VALUES (\"test06\",15)");
+        Long keyIdSub = query2.executeUpdate().getKey(Long.class);
+        Query query3 = Server.getInstance().getDatabase().createQuery("INSERT INTO subjectsInEduPlan VALUES(" + keyIdSub + "," + idPlan + ")");
+        query3.executeUpdate();
+    }
+    public static void deleteById(int idSub){
+        Query query2 = Server.getInstance().getDatabase().createQuery("DELETE FROM subject WHERE id = " + idSub);
+        //Query query2 = Server.getInstance().getDatabase().createQuery("DELETE FROM subjectsInEduPlan WHERE id = " + )
+        query2.executeUpdate();
     }
 }

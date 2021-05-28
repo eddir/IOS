@@ -32,4 +32,15 @@ public class EduPlanRepository extends Repository<EduPlan> implements IRepositor
             MainLogger.getLogger().error(exception.getMessage());
         }
     }
+    public static void addSubsInPlan(int idPlan,int...idSubs){
+        if(idSubs.length >= 2){
+            for(int i = 1;i < idSubs.length;i++){
+                Query query = Server.getInstance().getDatabase().createQuery("INSERT INTO subjectsInEduPlan VALUES (" + idSubs[i] + "," + idPlan + ")");
+            }
+
+        }
+        //Query query2 = Server.getInstance().getDatabase().createQuery("INSERT INTO subjectsInEduPlan VALUES (" + idSub + "," + idPlan + ")");
+
+    }
+    //public static void showAllSubIn
 }
