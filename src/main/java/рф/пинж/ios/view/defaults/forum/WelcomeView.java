@@ -8,6 +8,6 @@ public class WelcomeView extends View {
     }
 
     public String prepare() {
-        return "Добро пожаловать в ИОС.\nВведите help для получения справки.";
+        return "Добро пожаловать в ИОС.\nВведите help для получения справки.\n";
     }
 }
