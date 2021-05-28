@@ -94,7 +94,7 @@ public class UserRepository extends Repository<User> implements IRepository<User
 //        message.setText("Ваш новый пароль для входа в ИОС: " + password);
 //
 //        Transport transport = mailSession.getTransport();
-//        transport.connect(null, "20012308");
+//        transport.connect("ios.sstu.ru@gmail.com", "20012308");
 //        transport.sendMessage(message, message.getAllRecipients());
 //        transport.close();
 //

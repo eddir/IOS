@@ -23,6 +23,6 @@ public abstract class Command {
     }
 
     public void commandNotSupportedSuchArguments(CommandSender sender, int argsLength) {
-        sender.sendMessage("Комманда auth не принимает " + argsLength + " аргумент" + getEnding(argsLength));
+        sender.sendMessage("Комманда " + name + " не принимает " + argsLength + " аргумент" + getEnding(argsLength));
     }
 }

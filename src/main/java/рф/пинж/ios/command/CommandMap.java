@@ -5,6 +5,7 @@ import рф.пинж.ios.command.defaults.HelpCommand;
 import рф.пинж.ios.command.defaults.VersionCommand;
 import рф.пинж.ios.command.defaults.forum.TopicCommand;
 import рф.пинж.ios.command.defaults.users.AuthComand;
+import рф.пинж.ios.command.defaults.users.ChangePasswordCommand;
 import рф.пинж.ios.command.defaults.users.QuitCommand;
 import рф.пинж.ios.command.defaults.users.RestorePasswordCommand;
 
@@ -30,6 +31,7 @@ public class CommandMap {
         this.register(new AuthComand());
         this.register(new QuitCommand());
         this.register(new RestorePasswordCommand());
+        this.register(new ChangePasswordCommand());
     }
 
     public void register(Command command) {
