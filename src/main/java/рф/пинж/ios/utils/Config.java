@@ -5,8 +5,10 @@ import рф.пинж.ios.IOS;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Config {
 
@@ -35,7 +37,7 @@ public class Config {
         for (String line : content.split("\n")) {
             if (Pattern.compile("[a-zA-Z0-9\\-_.]*+=+[^\\r\\n]*").matcher(line).matches()) {
                 String[] b = line.split("=", -1);
-                this.properties.put(b[0], b[1].trim());
+                this.properties.put(b[0], Arrays.stream(b).skip(1).collect(Collectors.joining("=")).trim());
             }
         }
     }

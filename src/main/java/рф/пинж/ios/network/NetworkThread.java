@@ -43,7 +43,7 @@ public class NetworkThread extends Thread {
 
             while (Server.getInstance().isRunning()) {
                 String input = this.bufferedReader.readLine();
-                if (firstInput) {
+                if (firstInput && input.length() > 0) {
                     // Удаление BOM символов из первого сообщения
                     input = input.replaceAll("[^а-яА-Яa-zA-Z0-9:;.?!/ ]","").trim();
                     firstInput = false;
