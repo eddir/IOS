@@ -8,6 +8,8 @@ import рф.пинж.ios.command.CommandSender;
 import рф.пинж.ios.controller.Controller;
 import рф.пинж.ios.controller.URL;
 import рф.пинж.ios.network.Network;
+import рф.пинж.ios.permission.Permissible;
+import рф.пинж.ios.permission.Permission;
 import рф.пинж.ios.utils.Config;
 import рф.пинж.ios.utils.MainLogger;
 
@@ -76,6 +78,49 @@ public class Server {
         this.network.run();
     }
 
+    public ArrayList<String> getDefaultPermissions(Permissible user) {
+        ArrayList<String> permissions = new ArrayList<>();
+        if (user instanceof Client) {
+            //todo: ввод из файла permissions.yml
+            permissions.add("command.version");
+            permissions.add("command.help");
+            permissions.add("welcome.index");
+        }
+//        if (user instanceof Student) {
+//            permissions.add("forum.view");
+//        }
+        return permissions;
+    }
+
+    public boolean testPermission(Permissible target, Method method) {
+        if (method.isAnnotationPresent(Permission.class)) {
+            return this.testPermission(target, method.getAnnotation(Permission.class).value());
+        }
+        return true;
+    }
+
+    /**
+     * Проверяет владеет ли пользователь заданным правом
+     *
+     * @param target     пользователь
+     * @param permission права в виде строки, разделённые знаком ;
+     * @return true, если да, или false, если нет прав
+     */
+    public boolean testPermission(Permissible target, String permission) {
+        if (permission == null || permission.equals("")) {
+            return true;
+        }
+
+        String[] permissions = permission.split(";");
+        for (String perm : permissions) {
+            if (target.hasPermission(perm)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public boolean dispatchCommand(CommandSender sender, String command) {
         if (this.commandMap.dispatch(sender, command)) {
             return true;
@@ -127,11 +172,14 @@ public class Server {
             Controller controller = (Controller) c.getDeclaredConstructor().newInstance();
 
             for (Method method : controller.getClass().getMethods()) {
-                if (method.isAnnotationPresent(URL.class)) {
-                    if(method.getAnnotation(URL.class).value().equals(action)) {
+                if (method.isAnnotationPresent(URL.class) && method.getAnnotation(URL.class).value().equals(action)) {
+                    if (this.testPermission(sender, method)) {
                         sender.setAction(url);
                         method.invoke(controller, sender, args.get("do"));
                         return true;
+                    } else {
+                        sender.sendMessage("У Вас недостаточно прав для совершения этого действия.");
+                        return false;
                     }
                 }
             }
