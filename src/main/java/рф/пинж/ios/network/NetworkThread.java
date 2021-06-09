@@ -39,14 +39,20 @@ public class NetworkThread extends Thread {
             Server.getInstance().addClient(client);
 
             Server.getLogger().debug("Подключено!");
+            boolean firstInput = true;
 
             while (Server.getInstance().isRunning()) {
                 String input = this.bufferedReader.readLine();
+                if (firstInput && input.length() > 0) {
+                    // Удаление BOM символов из первого сообщения
+                    input = input.replaceAll("[^а-яА-Яa-zA-Z0-9:;.?!/ ]","").trim();
+                    firstInput = false;
+                }
                 DataPacket packet;
                 if (client.getAction().equals("!interface")) {
                     packet = new MenuPacket(input);
                 } else {
-                    if (input.startsWith("/")) {
+                    if (input.length() != 0 && input.startsWith("/")) {
                         packet = new CommandPacket(input.substring(1));
                     } else {
                         packet = new ViewPacket(input);
