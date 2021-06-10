@@ -1,7 +1,5 @@
 package рф.пинж.ios.network.protocol;
 
-import рф.пинж.ios.network.protocol.DataPacket;
-
 public class ViewPacket extends DataPacket {
     private final String request;
 
