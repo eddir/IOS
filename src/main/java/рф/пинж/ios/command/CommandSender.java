@@ -2,9 +2,10 @@ package рф.пинж.ios.command;
 
 import рф.пинж.ios.Server;
 import рф.пинж.ios.model.prototype.users.User;
+import рф.пинж.ios.permission.Permissible;
 import рф.пинж.ios.view.View;
 
-public interface CommandSender {
+public interface CommandSender extends Permissible {
 
     /**
      * Вывести обычное текстовое сообщение
