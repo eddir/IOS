@@ -1,6 +1,7 @@
 package рф.пинж.ios.model.prototype.ilya;
 
 import рф.пинж.ios.model.Model;
+import рф.пинж.ios.repository.ilya.CathedraRepository;
 import рф.пинж.ios.repository.ilya.InstituteRepository;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ public class Institute extends Model {
     private String abbreviation;
     private List<Cathedra> cathedras = new ArrayList<>();
 
-    //TODO: Изменить на User
+    //TODO: Изменить на User, коннект с Саньком
     private String director;
 
     {
@@ -19,9 +20,19 @@ public class Institute extends Model {
         this.columns = List.of("id", "title", "abbreviation", "idDirector");
     }
 
-    public Institute(String title, String abbreviation) {
-        this.title = title;
-        this.abbreviation = abbreviation;
+    public Institute(int id) {
+        this.id = id;
+        title = InstituteRepository.getPart(id, 1);
+        abbreviation = InstituteRepository.getPart(id, 2);
+
+        List<Integer> list = CathedraRepository.getAllId(id);
+
+        for (Integer value : list) {
+            cathedras.add(new Cathedra(value, this));
+        }
+
+        //TODO: продумать директора
+        director = null;
     }
 
     public String getTitle() {
@@ -45,8 +56,12 @@ public class Institute extends Model {
         return new String(director);
     }
 
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
     /**
-     *
+     * Красивое формировение всех институтов в список
      * @return Список всех институтов
      */
     public static String titlesToString() {

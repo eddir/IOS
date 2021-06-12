@@ -27,10 +27,23 @@ public class InstituteRepository extends Repository<Institute> implements IRepos
         }
     }
 
+    private static Integer counterRecords() {
+        try {
+            Query query = Server.getInstance().getDatabase().createQuery("SELECT COUNT(id) FROM institutes");
+            return query.executeScalar(Integer.class);
+        } catch (Sql2oException exception) {
+            MainLogger.getLogger().error(exception.getMessage());
+            return null;
+        }
+    }
+
     public static boolean insertNewInstitute(String title, String abbreviation) {
+
+        Integer temp = counterRecords();
+
         try {
             Query query = Server.getInstance().getDatabase().createQuery("INSERT INTO institutes " +
-                    "VALUES (NULL, \"" + title + "\", \"" + abbreviation + "\", NULL)");
+                    "VALUES (" + (temp + 1) + ", \"" + title + "\", \"" + abbreviation + "\", NULL)");
             query.executeUpdate();
             return true;
         } catch (Sql2oException exception) {
@@ -48,6 +61,32 @@ public class InstituteRepository extends Repository<Institute> implements IRepos
         } catch (Sql2oException exception) {
             MainLogger.getLogger().error(exception.getMessage());
             return false;
+        }
+    }
+
+    public static String getPart(int id,int key) {
+
+        String temp = "*";
+
+        try {
+
+            switch (key) {
+                case 1:
+                    temp = "title";
+                    break;
+                case 2:
+                    temp = "abbreviation";
+                    break;
+            }
+
+            Query query = Server.getInstance().getDatabase()
+                    .createQuery("SELECT " + temp + " FROM institutes WHERE id = " + id);
+
+            return query.executeScalar(String.class);
+
+        } catch (Sql2oException exception) {
+            MainLogger.getLogger().error(exception.getMessage());
+            return null;
         }
     }
 }
