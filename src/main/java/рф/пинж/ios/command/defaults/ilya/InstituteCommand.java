@@ -11,6 +11,10 @@ public class InstituteCommand extends Command {
         super("institute");
     }
 
+    // args[1] - айди института
+    // args[2] - title
+    // args[3] - abb
+
     @Override
     public boolean execute(CommandSender sender, String commandLabel, String[] args) {
 
@@ -42,23 +46,13 @@ public class InstituteCommand extends Command {
                 }
                 break;
             case "update":
-                // args[0] - айди института
-                // args[1] - title
-                // args[2] - abb
-                Institute temp = new Institute(Integer.parseInt(args[0]));
-
-                if (args[1].isEmpty() || args[1] == null) {
+                if (args.length != 4) {
                     sender.sendMessage("Что-то пошло не так!");
                 } else {
-                    temp.setTitle(args[1]);
-                }
-
-                if (args[2].isEmpty() || args[2] == null) {
-                    sender.sendMessage("Что-то пошло не так!");
-                } else {
+                    Institute temp = new Institute(Integer.parseInt(args[1]));
                     temp.setTitle(args[2]);
+                    temp.setAbbreviation(args[3]);
                 }
-
                 break;
         }
 

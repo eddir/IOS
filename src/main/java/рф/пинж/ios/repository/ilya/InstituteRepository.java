@@ -102,6 +102,13 @@ public class InstituteRepository extends Repository<Institute> implements IRepos
                 }
                 break;
             case "abb":
+                try {
+                    Query query = Server.getInstance().getDatabase().createQuery("UPDATE institutes SET abbreviation = \"" + newValue + "\" WHERE id = " + id);
+                    query.executeUpdate();
+                } catch (Sql2oException exception) {
+                    MainLogger.getLogger().error(exception.getMessage());
+                    return false;
+                }
                 break;
         }
 

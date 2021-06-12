@@ -49,6 +49,7 @@ public class Institute extends Model {
 
     public void setAbbreviation(String abbreviation) {
         this.abbreviation = abbreviation;
+        InstituteRepository.update("abb", id, abbreviation);
     }
 
     //TODO: Как саня сделает юзера
