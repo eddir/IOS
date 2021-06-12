@@ -26,6 +26,7 @@ public class WelcomeController extends Controller {
             {
                 put("Авторизация", new WelcomeAction("авторизация"));
                 put("Помощь", new CommandAction("help"));
+                put("Институты", new ViewAction("ilya/institute/institutes"));
                 put("Топик", new ViewAction("forum/topic/first"));
                 put("Выход", new WelcomeAction("выход"));
             }

@@ -1,6 +1,9 @@
 package рф.пинж.ios.model.prototype.ilya;
 
+import рф.пинж.ios.controller.defaults.ilya.InstituteController;
 import рф.пинж.ios.model.Model;
+import рф.пинж.ios.repository.ilya.CathedraRepository;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,13 +28,22 @@ public class Cathedra extends Model {
         this.head = null;
     }
 
+    public static String titlesToString(int id) {
+        List<String> temp = CathedraRepository.getAllTitles(id);
+        StringBuilder str = new StringBuilder();
+        int counter = 1;
+
+        for (String test : temp) {
+            str.append(counter++).append(". ").append(test).append("\n\r");
+        }
+
+        InstituteController.VAL = 1;
+        return str.toString();
+    }
+
     @Override
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTitle() {

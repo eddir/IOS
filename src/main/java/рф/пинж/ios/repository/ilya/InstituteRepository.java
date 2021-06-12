@@ -52,10 +52,10 @@ public class InstituteRepository extends Repository<Institute> implements IRepos
         }
     }
 
-    public static boolean deleteInstitute(String abbreviation) {
+    public static boolean deleteInstitute(int id) {
         try {
             Query query = Server.getInstance().getDatabase()
-                                .createQuery("DELETE FROM institutes WHERE abbreviation LIKE \'" + abbreviation+ "\'");
+                                .createQuery("DELETE FROM institutes WHERE id = " + id);
             query.executeUpdate();
             return true;
         } catch (Sql2oException exception) {
@@ -88,5 +88,23 @@ public class InstituteRepository extends Repository<Institute> implements IRepos
             MainLogger.getLogger().error(exception.getMessage());
             return null;
         }
+    }
+
+    public static boolean update(String key, int id, String newValue) {
+        switch (key) {
+            case "title":
+                try {
+                    Query query = Server.getInstance().getDatabase().createQuery("UPDATE institutes SET title = \"" + newValue + "\" WHERE id = " + id);
+                    query.executeUpdate();
+                } catch (Sql2oException exception) {
+                    MainLogger.getLogger().error(exception.getMessage());
+                    return false;
+                }
+                break;
+            case "abb":
+                break;
+        }
+
+        return true;
     }
 }

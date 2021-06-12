@@ -11,7 +11,6 @@ public class Institute extends Model {
     private String title;
     private String abbreviation;
     private List<Cathedra> cathedras = new ArrayList<>();
-
     //TODO: Изменить на User, коннект с Саньком
     private String director;
 
@@ -22,17 +21,17 @@ public class Institute extends Model {
 
     public Institute(int id) {
         this.id = id;
-        title = InstituteRepository.getPart(id, 1);
-        abbreviation = InstituteRepository.getPart(id, 2);
+        this.title = InstituteRepository.getPart(id, 1);
+        this.abbreviation = InstituteRepository.getPart(id, 2);
 
         List<Integer> list = CathedraRepository.getAllId(id);
 
         for (Integer value : list) {
-            cathedras.add(new Cathedra(value, this));
+            this.cathedras.add(new Cathedra(value, this));
         }
 
         //TODO: продумать директора
-        director = null;
+        this.director = null;
     }
 
     public String getTitle() {
@@ -41,6 +40,7 @@ public class Institute extends Model {
 
     public void setTitle(String title) {
         this.title = title;
+        InstituteRepository.update("title", id, title);
     }
 
     public String getAbbreviation() {
@@ -75,6 +75,11 @@ public class Institute extends Model {
         }
 
         return str.toString();
+    }
+
+    @Override
+    public String toString() {
+        return id + " " + title + " " + abbreviation;
     }
 }
 
