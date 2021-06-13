@@ -5,7 +5,8 @@ import рф.пинж.ios.controller.action.Action;
 import рф.пинж.ios.utils.MainLogger;
 import рф.пинж.ios.view.View;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Menu extends View implements Interface {
 

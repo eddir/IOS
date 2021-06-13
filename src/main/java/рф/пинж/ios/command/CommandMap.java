@@ -6,6 +6,7 @@ import рф.пинж.ios.command.defaults.VersionCommand;
 import рф.пинж.ios.command.defaults.forum.TopicCommand;
 import рф.пинж.ios.command.defaults.ilya.*;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -60,6 +61,18 @@ public class CommandMap {
         if (target == null) {
             return false;
         }
+
+        // Проверка прав
+        for (Method method : target.getClass().getMethods()) {
+            if ("execute".equals(method.getName())) {
+                if (!sender.getServer().testPermission(sender, method)) {
+                    sender.sendMessage("Недостаточно прав для выполнения этой команды.");
+                    return true;
+                }
+                break;
+            }
+        }
+
 
         try {
             target.execute(sender, sentCommandLabel, args);
