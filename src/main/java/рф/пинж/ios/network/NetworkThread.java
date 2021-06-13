@@ -2,10 +2,7 @@ package рф.пинж.ios.network;
 
 import рф.пинж.ios.Client;
 import рф.пинж.ios.Server;
-import рф.пинж.ios.network.protocol.CommandPacket;
-import рф.пинж.ios.network.protocol.DataPacket;
-import рф.пинж.ios.network.protocol.MenuPacket;
-import рф.пинж.ios.network.protocol.ViewPacket;
+import рф.пинж.ios.network.protocol.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -49,8 +46,10 @@ public class NetworkThread extends Thread {
                     firstInput = false;
                 }
                 DataPacket packet;
-                if (client.getAction().equals("!interface")) {
+                if (client.getAction().equals("!menu")) {
                     packet = new MenuPacket(input);
+                } else if (client.getAction().equals("!input")) {
+                    packet = new InputPacket(input);
                 } else {
                     if (input.length() != 0 && input.startsWith("/")) {
                         packet = new CommandPacket(input.substring(1));
