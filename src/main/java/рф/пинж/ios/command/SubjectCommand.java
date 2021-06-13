@@ -8,14 +8,13 @@ public class SubjectCommand extends Command{
     public SubjectCommand(){
         super("subject");
     }
-
     @Override
     public boolean execute(CommandSender sender, String commandLabel, String[] args) {
         try{
             switch (args[0]){
                 case "create":
                     if(args.length == 3)
-                        SubjectRepository.createANDaddToEduPlan(args[1],Integer.parseInt(args[2]));
+                        SubjectRepository.createAndAddToEduPlan(args[1],Integer.parseInt(args[2]));
                     else if (args.length == 2) {
                         SubjectRepository.create(args[1]);
                     }

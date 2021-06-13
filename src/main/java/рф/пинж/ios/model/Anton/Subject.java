@@ -20,6 +20,7 @@ public class Subject extends Model {
     protected int amountOfHourPerSemestr;
     protected Set<typeMark> typeOfMarks = new HashSet<typeMark>(); //Элементы должны быть уникальны!
     protected int pathToDirect;
+    protected int idForum;
     public Subject(){
         super();
     }
@@ -30,11 +31,20 @@ public class Subject extends Model {
         this.description = description;
     }
     */
-    public Subject(String description,int id,int idDir) {
+    public Subject(String description,int id,int idDir,int idTopic) {
         this();
         this.id = id;
         this.pathToDirect = idDir;
         this.description = description;
+        this.idForum = idTopic;
+    }
+
+    public int getIdForum() {
+        return idForum;
+    }
+
+    public void setIdForum(int idForum) {
+        this.idForum = idForum;
     }
 
     public String getDescription() {

@@ -16,16 +16,20 @@ public class SubjectRepository extends Repository<Subject> implements IRepositor
     //description , idProfil
     //Создание Subject только в таблице subject
     public static void create(String description){
-        //МЕТОД СОЗДАНИЯ РЕПОЗ
-        int idRep = 1;
-        Query query2 = Server.getInstance().getDatabase().createQuery("INSERT INTO subject (description,PathToDirect) VALUES(" + "\"" + description + "\"" + "," + idRep + ")");
+        int idDir = 1; //МЕТОД СОЗДАНИЯ РЕПОЗ
+        int idTopic = 1;//МЕТОД СОЗДАНИЯ ФОРУМА
+
+        Query query2 = Server.getInstance().getDatabase().createQuery("INSERT INTO subject (description,PathToDirect,idTopic) VALUES(" + "\"" + description + "\"" + "," + idDir + "," + idTopic + ")");
         query2.executeUpdate();
     }
     //Создание Subject в таблице subject и связать предмет с учебным планом
-    public static void createANDaddToEduPlan(String description,int idPlan){
+    public static void createAndAddToEduPlan(String description, int idPlan){
         //Проверка на существование такого плана
-        Query query2 = Server.getInstance().getDatabase().createQuery("INSERT INTO subject (description) VALUES(" + "\"" + description + "\")");
+        int idDir = 1; //МЕТОД СОЗДАНИЯ РЕПОЗ
+        int idTopic = 1;//МЕТОД СОЗДАНИЯ ФОРУМА
+        Query query2 = Server.getInstance().getDatabase().createQuery("INSERT INTO subject (description,PathToDirect,idTopic) VALUES (" + "\"" + description + "\"" + "," + idDir + "," + idTopic + ")");
         Long keyIdSub = query2.executeUpdate().getKey(Long.class);
+
         Query query3 = Server.getInstance().getDatabase().createQuery("INSERT INTO subjectsInEduPlan VALUES(" + keyIdSub + "," + idPlan + ")");
         query3.executeUpdate();
     }
