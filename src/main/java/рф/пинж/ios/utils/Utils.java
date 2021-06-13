@@ -309,16 +309,16 @@ public class Utils {
         return query_pairs;
     }
 
-    public static JsonNode sendEmail(String recipientEmail, String subject, String text) throws UnirestException {
-
+    public static JsonNode sendEmail(String recipientEmail, String subject, String text) throws UnirestException, FileNotFoundException {
+        Config config = new Config();
+        config.load();
         HttpResponse<JsonNode> request = Unirest.post("https://api.mailgun.net/v3/" + "mail.rostkov.pro" + "/messages")
-                .basicAuth("api", "***REMOVED***")
+                .basicAuth("api", config.getProperty("pm-apikey"))
                 .field("from", "Техподдержка ИОС <postmaster@mail.rostkov.pro>")
                 .field("to", recipientEmail)
                 .field("subject", subject)
                 .field("text", text)
                 .asJson();
-
         return request.getBody();
     }
 
