@@ -16,7 +16,7 @@ public class QuitCommand extends Command {
             return false;
         }
         sender.setUser(null);
-        Server.getInstance().dispatchView(sender, "users/auth/signIn");
+        Server.getInstance().dispatchView(sender, "welcome/index");
         return true;
     }
 }

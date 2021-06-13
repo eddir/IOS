@@ -1,5 +1,6 @@
 package рф.пинж.ios.command.defaults.users;
 
+import рф.пинж.ios.Server;
 import рф.пинж.ios.command.Command;
 import рф.пинж.ios.command.CommandSender;
 import рф.пинж.ios.repository.users.UserRepository;
@@ -11,12 +12,12 @@ public class RestorePasswordCommand extends Command {
 
     @Override
     public boolean execute(CommandSender sender, String commandLabel, String[] args) {
-        if (args.length != 2) {
+        if (args.length != 0) {
             commandNotSupportedSuchArguments(sender, args.length);
             return false;
         }
         try {
-            UserRepository.changeUserPassword(args[0], args[1]);
+            Server.getInstance().dispatchView(sender, "users/restorePassword/restore_pwd");
         }
         catch(Exception e) {
             e.printStackTrace();
