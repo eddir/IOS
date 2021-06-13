@@ -40,6 +40,8 @@ public class Server {
 
     private Connection database;
 
+    private static Map<String, String> confirmationСodes = new HashMap<>();
+
     public Server(MainLogger logger, String ip, int port) {
         instance = this;
         this.logger = logger;
@@ -229,5 +231,19 @@ public class Server {
 
     public static Server getInstance() {
         return instance;
+    }
+
+    public static void putCodes(String login, String code) {
+        confirmationСodes.put(login, code);
+    }
+
+    public static boolean isRightCode(String login, String code, boolean isNeedToDelete) {
+        if (confirmationСodes.get(login).equals(code)) {
+            confirmationСodes.remove(login, code);
+            return true;
+        }
+        if (isNeedToDelete)
+            confirmationСodes.remove(login, code);
+        return false;
     }
 }

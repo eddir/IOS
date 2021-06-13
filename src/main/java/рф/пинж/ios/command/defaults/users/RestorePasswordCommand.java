@@ -17,7 +17,7 @@ public class RestorePasswordCommand extends Command {
             return false;
         }
         try {
-            Server.getInstance().dispatchView(sender, "users/signIn/restore_pwd");
+            Server.getInstance().dispatchView(sender, "users/restorePassword/restore_pwd");
         }
         catch(Exception e) {
             e.printStackTrace();

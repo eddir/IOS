@@ -4,10 +4,7 @@ import рф.пинж.ios.Server;
 import рф.пинж.ios.command.defaults.HelpCommand;
 import рф.пинж.ios.command.defaults.VersionCommand;
 import рф.пинж.ios.command.defaults.forum.TopicCommand;
-import рф.пинж.ios.command.defaults.users.AuthComand;
-import рф.пинж.ios.command.defaults.users.ChangePasswordCommand;
-import рф.пинж.ios.command.defaults.users.QuitCommand;
-import рф.пинж.ios.command.defaults.users.RestorePasswordCommand;
+import рф.пинж.ios.command.defaults.users.*;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -33,6 +30,9 @@ public class CommandMap {
         this.register(new QuitCommand());
         this.register(new RestorePasswordCommand());
         this.register(new ChangePasswordCommand());
+        this.register(new DeleteUserCommand());
+        this.register(new ChangeUserDataCommand());
+        this.register(new RegisterCommand());
     }
 
     public void register(Command command) {

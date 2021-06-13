@@ -53,7 +53,7 @@ public class Client implements CommandSender {
         this.thread.show(view.prepare());
     }
 
-    public void handlePacket(DataPacket packet) {
+    public void handlePacket(DataPacket packet) throws Exception {
         if (packet.getPid() == ProtocolInfo.COMMAND_PACKET) {
             CommandPacket commandPacket = (CommandPacket) packet;
             Server.getLogger().debug("Принята команда.");
