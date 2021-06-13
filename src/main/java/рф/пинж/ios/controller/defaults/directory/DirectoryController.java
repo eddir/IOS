@@ -5,7 +5,9 @@ import рф.пинж.ios.controller.Controller;
 import рф.пинж.ios.controller.URL;
 import рф.пинж.ios.controller.action.CommandAction;
 import рф.пинж.ios.model.prototype.directory.Directory;
+import рф.пинж.ios.model.prototype.iosFile.IosFile;
 import рф.пинж.ios.repository.directory.DirectoryRepository;
+import рф.пинж.ios.repository.iosFile.IosFileRepository;
 import рф.пинж.ios.utils.MainLogger;
 import рф.пинж.ios.view.element.Menu;
 
@@ -24,14 +26,23 @@ public class DirectoryController extends Controller {
                 try {
                     Directory currentDir = (new DirectoryRepository()).get(Integer.parseInt(request));
                     List<Directory> childrenDir = (new DirectoryRepository()).getChildren(Integer.parseInt(request));
+                    List<IosFile> files = (new IosFileRepository()).getNestedFiles(Integer.parseInt(request));
 
-                    put("<- " + currentDir.getTitle(), currentDir.getParent_dir() != null ?
+                    put("../" + currentDir.getTitle(), currentDir.getParent_dir() != null ?
                             new CommandAction("openDirectory " + currentDir.getParent_dir()) :
-                            new CommandAction("openDirectory 1"));
+                            new CommandAction("openDirectory 1")); //TODO: переход на дисциплину
 
                     for (Directory child : childrenDir) {
-                        put(child.getTitle(), new CommandAction("openDirectory " + child.getId()));
+                        put("./" + child.getTitle(), new CommandAction("openDirectory " + child.getId()));
                     }
+
+                    for (IosFile file : files) {
+                        put(file.getFile_name(), new CommandAction("openFile " + file.getId()));
+                    }
+
+                    put("Удалить папку", null);
+                    put("Добавить папку", null);
+                    put("Добавить файл", null);
                 } catch (Exception e) {
                     MainLogger.getLogger().error(e.getMessage());
                 }

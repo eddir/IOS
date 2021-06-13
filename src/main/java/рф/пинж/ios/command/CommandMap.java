@@ -5,6 +5,7 @@ import рф.пинж.ios.command.defaults.HelpCommand;
 import рф.пинж.ios.command.defaults.VersionCommand;
 import рф.пинж.ios.command.defaults.directory.OpenDirectoryCommand;
 import рф.пинж.ios.command.defaults.forum.TopicCommand;
+import рф.пинж.ios.command.defaults.iosFile.OpenFileCommand;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class CommandMap {
         this.register(new TopicCommand());
         this.register(new HelpCommand());
         this.register(new OpenDirectoryCommand());
+        this.register(new OpenFileCommand());
     }
 
     public void register(Command command) {
