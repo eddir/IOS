@@ -10,6 +10,7 @@ public class TopicView extends View {
     }
 
     public String prepare() {
+
         return ((Topic)this.model).getTitle() + "\r\n";
     }
 }

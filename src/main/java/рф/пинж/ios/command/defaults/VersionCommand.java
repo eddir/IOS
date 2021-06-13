@@ -11,7 +11,7 @@ public class VersionCommand extends Command {
     }
 
     @Override
-    @Permission("commands.version")
+    @Permission("command.version")
     public boolean execute(CommandSender sender, String commandLabel, String[] args) {
         sender.sendMessage(String.format("Версия прототипа ИОС - %s", IOS.version));
         return true;
