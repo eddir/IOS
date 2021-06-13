@@ -16,6 +16,7 @@ public class EduPlanRepository extends Repository<EduPlan> implements IRepositor
     }
     public static void addNewPlan(String...args){
         try{
+            //description , idProfil
             Query query2 = Server.getInstance().getDatabase().createQuery("INSERT INTO eduPlan values(0,\"" + args[0] + "\"," + args[1] + ")");
             query2.executeUpdate();
         }
@@ -32,15 +33,15 @@ public class EduPlanRepository extends Repository<EduPlan> implements IRepositor
             MainLogger.getLogger().error(exception.getMessage());
         }
     }
-    public static void addSubsInPlan(int idPlan,int...idSubs){
-        if(idSubs.length >= 2){
-            for(int i = 1;i < idSubs.length;i++){
-                Query query = Server.getInstance().getDatabase().createQuery("INSERT INTO subjectsInEduPlan VALUES (" + idSubs[i] + "," + idPlan + ")");
-            }
+    public static void addSubsInPlan(int idPlan,int idSub){
+        //Query query = Server.getInstance().getDatabase().createQuery("INSERT INTO subjectsInEduPlan (idEduPlan,idSubject) VALUES (" + idPlan + "," + idSub + ")");
+        Query query = Server.getInstance().getDatabase().createQuery("INSERT INTO subjectsInEduPlan (idEduPlan,idSubject) VALUES ("+ idPlan + "," + idSub +")");
+        query.executeUpdate();
 
-        }
-        //Query query2 = Server.getInstance().getDatabase().createQuery("INSERT INTO subjectsInEduPlan VALUES (" + idSub + "," + idPlan + ")");
-
+    }
+    public static void delSubInPlan(int idPlan,int idSub){
+        Query query = Server.getInstance().getDatabase().createQuery("DELETE FROM subjectsInEduPlan WHERE (idSubject = " + idSub + " AND " + "idEduPlan = " + idPlan + ")");
+        query.executeUpdate();
     }
     //public static void showAllSubIn
 }

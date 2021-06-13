@@ -23,6 +23,8 @@ public class SubjectCommand extends Command{
                 case "delete":
                     SubjectRepository.deleteById(Integer.parseInt(args[1]));
                     break;
+                case "setTeacher":
+                    SubjectRepository.setTeacher(Integer.parseInt(args[1]),Integer.parseInt(args[2]));
             }
         }
         catch(Sql2oException exception){

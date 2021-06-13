@@ -1,10 +1,8 @@
 package рф.пинж.ios.command;
 
 import рф.пинж.ios.Server;
-import рф.пинж.ios.command.defaults.AddSubjectInEduPlanCommand;
-import рф.пинж.ios.command.defaults.HelpCommand;
-import рф.пинж.ios.command.defaults.ShowAllSubInEduPlanCommand;
-import рф.пинж.ios.command.defaults.VersionCommand;
+import рф.пинж.ios.command.defaults.*;
+import рф.пинж.ios.command.defaults.Anton.myPlan;
 import рф.пинж.ios.command.defaults.forum.TopicCommand;
 
 import java.util.ArrayList;
@@ -30,6 +28,8 @@ public class CommandMap {
         this.register(new SubjectCommand());
         this.register(new AddSubjectInEduPlanCommand());
         this.register(new ShowAllSubInEduPlanCommand());
+        this.register(new ProfilCommand());
+        this.register(new myPlan());
     }
 
     public void register(Command command) {

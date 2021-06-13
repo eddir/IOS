@@ -11,7 +11,7 @@ public class Subject extends Model {
         this.table = "subject";
         this.columns = List.of("id","description","idTeacher","semestrNumber","amountOfHourPerWeekEven","amountOfHourPerWeekOdd","amountOfHourPerSemestr","PathToDirect");
     }
-    String profil;
+    //String profil;
     protected String description;
     protected int semestrNumber;
     protected String teacher;
@@ -19,14 +19,21 @@ public class Subject extends Model {
     protected int amountOfHourPerWeekOdd;
     protected int amountOfHourPerSemestr;
     protected Set<typeMark> typeOfMarks = new HashSet<typeMark>(); //Элементы должны быть уникальны!
-    protected String pathToDirect;
+    protected int pathToDirect;
     public Subject(){
         super();
     }
-
+    /*
     public Subject(String profil, String description) {
         this();
         this.profil = profil;
+        this.description = description;
+    }
+    */
+    public Subject(String description,int id,int idDir) {
+        this();
+        this.id = id;
+        this.pathToDirect = idDir;
         this.description = description;
     }
 
@@ -86,19 +93,12 @@ public class Subject extends Model {
         this.typeOfMarks = typeOfMarks;
     }
 
-    public String getPathToDirect() {
+    public int getPathToDirect() {
         return pathToDirect;
     }
 
-    public void setPathToDirect(String pathToDirect) {
+    public void setPathToDirect(int pathToDirect) {
         this.pathToDirect = pathToDirect;
     }
 
-    public String getProfil() {
-        return profil;
-    }
-
-    public void setProfil(String profil) {
-        this.profil = profil;
-    }
 }
