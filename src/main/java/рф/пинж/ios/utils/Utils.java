@@ -319,7 +319,6 @@ public class Utils {
                 .field("subject", subject)
                 .field("text", text)
                 .asJson();
-
         return request.getBody();
     }
 
