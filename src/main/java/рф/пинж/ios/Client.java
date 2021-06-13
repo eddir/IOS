@@ -53,7 +53,7 @@ public class Client implements CommandSender {
         this.thread.show(view.prepare());
     }
 
-    public void handlePacket(DataPacket packet) {
+    public void handlePacket(DataPacket packet) throws Exception {
         if (packet.getPid() == ProtocolInfo.COMMAND_PACKET) {
             CommandPacket commandPacket = (CommandPacket) packet;
             Server.getLogger().debug("Принята команда.");
@@ -103,16 +103,6 @@ public class Client implements CommandSender {
     }
 
     @Override
-    public User getUser() {
-        return user;
-    }
-
-    @Override
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    @Override
     public boolean hasPermission(String permission) {
         return this.permissions.stream().anyMatch(s -> s.equals(permission));
     }
@@ -125,5 +115,16 @@ public class Client implements CommandSender {
     @Override
     public void recalculatePermissions() {
         this.permissions = this.getServer().getDefaultPermissions(this);
+    }
+
+
+    @Override
+    public User getUser() {
+        return user;
+    }
+
+    @Override
+    public void setUser(User user) {
+        this.user = user;
     }
 }
