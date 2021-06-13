@@ -69,10 +69,13 @@ public class Institute extends Model {
     }
 
     public boolean removeCathedra(int id) {
-        int temp = this.cathedras.size();
         this.cathedras.remove(CathedraRepository.getTitle(id));
         CathedraRepository.deleteCathedra(id);
         return true;
+    }
+
+    public List<Cathedra> getCathedras() {
+        return this.cathedras;
     }
 
     public static String titlesToString() {

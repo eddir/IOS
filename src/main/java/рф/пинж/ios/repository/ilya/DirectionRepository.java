@@ -26,4 +26,48 @@ public class DirectionRepository extends Repository<Institute> implements IRepos
             return null;
         }
     }
+
+    public static String getTitle(int id) {
+        try {
+            Query query = Server.getInstance().getDatabase().createQuery("SELECT title FROM `directions` WHERE idCathedra = " + id);
+            return query.executeScalar(String.class);
+        } catch (Sql2oException exception) {
+            MainLogger.getLogger().error(exception.getMessage());
+            return null;
+        }
+    }
+
+    public static boolean deleteDirection(int id) {
+        try {
+            Query query = Server.getInstance().getDatabase()
+                    .createQuery("DELETE FROM directions WHERE id = " + id);
+            query.executeUpdate();
+            return true;
+        } catch (Sql2oException exception) {
+            MainLogger.getLogger().error(exception.getMessage());
+            return false;
+        }
+    }
+
+    public static boolean insertNewDirection(int temp, String title, int idi) {
+        try {
+            Query query = Server.getInstance().getDatabase().createQuery("INSERT INTO directions (id, title, idCathedra) " +
+                    "VALUES (" + temp + ", \"" + title + "\", " + idi + ")");
+            query.executeUpdate();
+            return true;
+        } catch (Sql2oException exception) {
+            MainLogger.getLogger().error(exception.getMessage());
+            return false;
+        }
+    }
+
+    public static List<String> getAllTitles(int idCathedra) {
+        try {
+            Query query = Server.getInstance().getDatabase().createQuery("SELECT title FROM `directions` WHERE idCathedra = " + idCathedra);
+            return query.executeScalarList(String.class);
+        } catch (Sql2oException exception) {
+            MainLogger.getLogger().error(exception.getMessage());
+            return null;
+        }
+    }
 }

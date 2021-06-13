@@ -61,7 +61,13 @@ public class Cathedra extends Model {
 
     public void addDirection(Direction direction) {
         this.directions.add(direction);
-        //Метод сохраняющий в бд
+        DirectionRepository.insertNewDirection(direction.getId(), direction.getTitle(), direction.getCathedra().getId());
+    }
+
+    public boolean removeDirection(int id) {
+        this.directions.remove(DirectionRepository.getTitle(id));
+        DirectionRepository.deleteDirection(id);
+        return true;
     }
 
     public Institute getInstitute() {
