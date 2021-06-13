@@ -23,7 +23,7 @@ public class WelcomeController extends Controller {
     @Permission("welcome.index")
     public void index(CommandSender sender, String request) {
         sender.sendView(view);
-        sender.sendView(new Menu(new LinkedHashMap<>() {
+        /*sender.sendView(new Menu(new LinkedHashMap<>() {
             {
                 put("Авторизация", new WelcomeAction("авторизация"));
                 put("Помощь", new CommandAction("help"));
@@ -31,11 +31,11 @@ public class WelcomeController extends Controller {
               
                 //если юзер Студент - то
                 put("Мой учебный план",new CommandAction("getAllSub 10"));
-
+                put("Институты", new ViewAction("ilya/institute/institutes"));
                 put("Ввести данные", new InputAction(new Input(new WelcomeInputAction(), "Введите имя:")));
                 put("Выход", new WelcomeAction("выход"));
             }
-        }));
+        }));*/
     }
 
     static class WelcomeInputAction implements InputableAction {

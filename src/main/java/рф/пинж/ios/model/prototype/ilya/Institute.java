@@ -1,6 +1,7 @@
 package рф.пинж.ios.model.prototype.ilya;
 
 import рф.пинж.ios.model.Model;
+import рф.пинж.ios.model.prototype.users.User;
 import рф.пинж.ios.repository.ilya.CathedraRepository;
 import рф.пинж.ios.repository.ilya.InstituteRepository;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ public class Institute extends Model {
     private String abbreviation;
     private List<Cathedra> cathedras = new ArrayList<>();
     //TODO: Изменить на User, коннект с Саньком
-    private String director;
+    private User director;
 
     {
         this.table = "institutes";
@@ -30,7 +31,7 @@ public class Institute extends Model {
             this.cathedras.add(new Cathedra(value, this));
         }
 
-        //TODO: коннект с Саньком
+        // TODO: Саня сделает
         this.director = null;
     }
 
@@ -52,12 +53,11 @@ public class Institute extends Model {
         InstituteRepository.update("abb", id, abbreviation);
     }
 
-    //TODO: Как саня сделает юзера
-    public String getDirector() {
-        return new String(director);
+    public User getDirector() {
+        return this.director;
     }
 
-    public void setDirector(String director) {
+    public void setDirector(User director) {
         this.director = director;
     }
 

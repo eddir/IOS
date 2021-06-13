@@ -110,6 +110,7 @@ public class Client implements CommandSender {
     @Override
     public void setUser(User user) {
         this.user = user;
+    }
 
     @Override
     public boolean hasPermission(String permission) {

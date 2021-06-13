@@ -42,7 +42,6 @@ public class Cathedra extends Model {
         this.id = id;
         this.institute = institute;
         this.title = title;
-
         this.head = null;
     }
 
