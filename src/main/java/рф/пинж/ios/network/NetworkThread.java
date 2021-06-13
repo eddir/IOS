@@ -2,10 +2,7 @@ package рф.пинж.ios.network;
 
 import рф.пинж.ios.Client;
 import рф.пинж.ios.Server;
-import рф.пинж.ios.network.protocol.CommandPacket;
-import рф.пинж.ios.network.protocol.DataPacket;
-import рф.пинж.ios.network.protocol.MenuPacket;
-import рф.пинж.ios.network.protocol.ViewPacket;
+import рф.пинж.ios.network.protocol.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,14 +36,22 @@ public class NetworkThread extends Thread {
             Server.getInstance().addClient(client);
 
             Server.getLogger().debug("Подключено!");
+            boolean firstInput = true;
 
             while (Server.getInstance().isRunning()) {
                 String input = this.bufferedReader.readLine();
+                if (firstInput && input.length() > 0) {
+                    // Удаление BOM символов из первого сообщения
+                    input = input.replaceAll("[^а-яА-Яa-zA-Z0-9:;.?!/ ]","").trim();
+                    firstInput = false;
+                }
                 DataPacket packet;
-                if (client.getAction().equals("!interface")) {
+                if (client.getAction().equals("!menu")) {
                     packet = new MenuPacket(input);
+                } else if (client.getAction().equals("!input")) {
+                    packet = new InputPacket(input);
                 } else {
-                    if (input.startsWith("/")) {
+                    if (input.length() != 0 && input.startsWith("/")) {
                         packet = new CommandPacket(input.substring(1));
                     } else {
                         packet = new ViewPacket(input);
