@@ -3,6 +3,7 @@ package рф.пинж.ios.command;
 import рф.пинж.ios.Server;
 import рф.пинж.ios.command.defaults.HelpCommand;
 import рф.пинж.ios.command.defaults.VersionCommand;
+import рф.пинж.ios.command.defaults.directory.OpenDirectoryCommand;
 import рф.пинж.ios.command.defaults.forum.TopicCommand;
 
 import java.lang.reflect.Method;
@@ -25,6 +26,7 @@ public class CommandMap {
         this.register(new VersionCommand());
         this.register(new TopicCommand());
         this.register(new HelpCommand());
+        this.register(new OpenDirectoryCommand());
     }
 
     public void register(Command command) {

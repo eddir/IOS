@@ -32,26 +32,13 @@ public interface IDirectory extends IModel {
     void setCreated_at(String created_at);
 
     /**
-     * Возвращает родительскую директорию
+     * Возвращает id родительской директории
      */
-    Directory getParent_dir();
+    Integer getParent_dir();
 
     /**
-     * Устанавливает родительскую директорию
-     * @param parent_dir - родительская директория
+     * Устанавливает id родительской директории
+     * @param parent_dir - id родительской директории
      */
-    void setParent_dir(Directory parent_dir);
-
-    /**
-     * Возвращает список дочерних директорий
-     */
-    List<Directory> getChildren_dir();
-
-    /**
-     * Добавляет дочерние директории
-     * @param children_dir - массив дочерних директорий
-     */
-    void setChildren_dir(List<Directory> children_dir);
-
-    // files
+    void setParent_dir(int parent_dir);
 }
