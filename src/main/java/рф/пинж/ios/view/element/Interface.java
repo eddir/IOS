@@ -11,5 +11,5 @@ public interface Interface {
      * @param sender пользователь, который пользуется интерфейсом
      * @param action выбранное действие пользователем
      */
-    public boolean handle(CommandSender sender, String action);
+    public boolean handle(CommandSender sender, String action) throws Exception;
 }

@@ -18,8 +18,10 @@ public class AuthComand extends Command {
         }
         User user = UserRepository.getUserByLogin(args[0]);
         if (user != null) {
-            if (user.isCorrectPassword(args[1]))
+            if (user.isCorrectPassword(args[1])) {
+                sender.sendMessage("Вы авторизовались в системе ИОС!");
                 sender.setUser(user);
+            }
             else
                 sender.sendMessage("Введён неправильный пароль");
         }

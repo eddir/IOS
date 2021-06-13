@@ -2,7 +2,7 @@ package рф.пинж.ios.model.prototype.users;
 
 import рф.пинж.ios.model.Model;
 
-import java.security.MessageDigest;
+import static рф.пинж.ios.utils.Utils.sha512Generator;
 
 public abstract class User extends Model {
 
@@ -79,21 +79,5 @@ public abstract class User extends Model {
         return this.password.equals(sha512Generator(password));
     }
 
-    public static String sha512Generator(String string) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-512");
-            byte[] hash = digest.digest(string.getBytes());
-            StringBuilder hashString = new StringBuilder();
-            for (byte b : hash) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) hashString.append('0');
-                hashString.append(hex);
-            }
-            return hashString.toString();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
+
 }

@@ -69,6 +69,8 @@ public class NetworkThread extends Thread {
             this.line = this.getName(); //reused String line for getting thread name
             Server.getLogger().info("Клиент " + this.line + " разорвал связь.");
 
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             Network.closeThread(this);
         }

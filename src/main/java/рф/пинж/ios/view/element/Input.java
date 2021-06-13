@@ -20,7 +20,7 @@ public class Input extends View implements Interface {
     }
 
     @Override
-    public boolean handle(CommandSender sender, String input) {
+    public boolean handle(CommandSender sender, String input) throws Exception {
         this.handler.execute(sender, input);
         return true;
     }

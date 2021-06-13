@@ -4,6 +4,7 @@ import рф.пинж.ios.Server;
 import рф.пинж.ios.command.defaults.*;
 import рф.пинж.ios.command.defaults.Anton.myPlan;
 import рф.пинж.ios.command.defaults.forum.TopicCommand;
+import рф.пинж.ios.command.defaults.users.*;
 import рф.пинж.ios.command.defaults.users.AuthComand;
 import рф.пинж.ios.command.defaults.users.ChangePasswordCommand;
 import рф.пинж.ios.command.defaults.users.QuitCommand;
@@ -35,6 +36,9 @@ public class CommandMap {
         this.register(new QuitCommand());
         this.register(new RestorePasswordCommand());
         this.register(new ChangePasswordCommand());
+        this.register(new DeleteUserCommand());
+        //this.register(new ChangeUserDataCommand());
+        this.register(new RegisterCommand());
 
         this.register(new EduPlanCommand());
         this.register(new SubjectCommand());
