@@ -111,6 +111,7 @@ public class Client implements CommandSender {
     public void setUser(User user) {
         this.user = user;
     }
+  
     @Override
     public boolean hasPermission(String permission) {
         return this.permissions.stream().anyMatch(s -> s.equals(permission));
@@ -124,5 +125,16 @@ public class Client implements CommandSender {
     @Override
     public void recalculatePermissions() {
         this.permissions = this.getServer().getDefaultPermissions(this);
+    }
+
+
+    @Override
+    public User getUser() {
+        return user;
+    }
+
+    @Override
+    public void setUser(User user) {
+        this.user = user;
     }
 }

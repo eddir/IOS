@@ -37,7 +37,7 @@ public class CommandMap {
         this.register(new RestorePasswordCommand());
         this.register(new ChangePasswordCommand());
         this.register(new DeleteUserCommand());
-        //this.register(new ChangeUserDataCommand());
+        this.register(new ChangeUserDataCommand());
         this.register(new RegisterCommand());
 
         this.register(new EduPlanCommand());
