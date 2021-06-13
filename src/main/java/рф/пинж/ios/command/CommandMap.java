@@ -4,6 +4,7 @@ import рф.пинж.ios.Server;
 import рф.пинж.ios.command.defaults.HelpCommand;
 import рф.пинж.ios.command.defaults.VersionCommand;
 import рф.пинж.ios.command.defaults.forum.TopicCommand;
+import рф.пинж.ios.command.defaults.ilya.*;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -25,6 +26,11 @@ public class CommandMap {
         this.register(new VersionCommand());
         this.register(new TopicCommand());
         this.register(new HelpCommand());
+        this.register(new InstitutesCommand());
+        this.register(new InstituteCommand());
+        this.register(new CathedrasCommand());
+        this.register(new CathedraCommand());
+        this.register(new DirectionsCommand());
     }
 
     public void register(Command command) {

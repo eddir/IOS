@@ -23,6 +23,7 @@ public class WelcomeController extends Controller {
     @Permission("welcome.index")
     public void index(CommandSender sender, String request) {
         sender.sendView(view);
+
         sender.sendView(new Menu(new LinkedHashMap<>() {
             {
                 put("Авторизация", new WelcomeAction("авторизация"));

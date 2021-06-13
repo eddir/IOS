@@ -17,6 +17,7 @@ public class HelpCommand extends Command {
     @Permission("command.help")
     public boolean execute(CommandSender sender, String commandLabel, String[] args) {
         sender.sendMessage("version - узнать версию сервера.");
+        sender.sendMessage("institutes - вывести список институов.");
         return true;
     }
 }
