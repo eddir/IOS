@@ -4,6 +4,7 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import рф.пинж.ios.Server;
 import рф.пинж.ios.command.CommandSender;
 
 import java.io.*;
@@ -312,7 +313,7 @@ public class Utils {
 
         HttpResponse<JsonNode> request = Unirest.post("https://api.mailgun.net/v3/" + "mail.rostkov.pro" + "/messages")
                 .basicAuth("api", "a41ef4a4cf60a759ebb2b371113da9cc-90ac0eb7-1423a17f")
-                .field("from", "Техподдержка ИОС <postmaster@mail.rostkov.pro")
+                .field("from", "Техподдержка ИОС <postmaster@mail.rostkov.pro>")
                 .field("to", recipientEmail)
                 .field("subject", subject)
                 .field("text", text)
@@ -343,6 +344,7 @@ public class Utils {
         String pattern = "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9@#$%!]).{8,40}";
         return password != null && password.matches(pattern);
     }
+
     public static boolean isValidPassword(String password, CommandSender sender) {
         boolean isValid = isValidPassword(password);
         if (!isValid) {
@@ -351,5 +353,23 @@ public class Utils {
             sender.sendMessage("Длина пароля от 8 до 40 символов");
         }
         return isValid;
+    }
+
+    public static boolean isValidEmail(String email) {
+        String pattern = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        return email != null && email.matches(pattern);
+    }
+
+    public static boolean isValidLogin(String login) {
+        String pattern = "[A-Za-z0-9]{2,20}";
+        return login != null && login.matches(pattern);
+    }
+
+    public static String generateRandomCode() {
+        Random random = new Random();
+        StringBuilder code = new StringBuilder();
+        for (int i = 0; i < 4; i++)
+            code.append(random.nextInt(10));
+        return code.toString();
     }
 }
