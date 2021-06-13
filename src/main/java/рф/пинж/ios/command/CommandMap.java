@@ -51,6 +51,8 @@ public class CommandMap {
         this.register(new CathedrasCommand());
         this.register(new CathedraCommand());
         this.register(new DirectionsCommand());
+
+        this.register(new ActiveMVC());
     }
 
     public void register(Command command) {

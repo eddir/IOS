@@ -5,6 +5,7 @@ import рф.пинж.ios.controller.Controller;
 import рф.пинж.ios.controller.URL;
 import рф.пинж.ios.controller.action.CommandAction;
 import рф.пинж.ios.controller.action.ViewAction;
+import рф.пинж.ios.repository.ilya.CathedraRepository;
 import рф.пинж.ios.repository.ilya.InstituteRepository;
 import рф.пинж.ios.view.defaults.ilya.InstituteView;
 import рф.пинж.ios.view.element.Menu;

@@ -103,16 +103,6 @@ public class Client implements CommandSender {
     }
 
     @Override
-    public User getUser() {
-        return user;
-    }
-
-    @Override
-    public void setUser(User user) {
-        this.user = user;
-    }
-  
-    @Override
     public boolean hasPermission(String permission) {
         return this.permissions.stream().anyMatch(s -> s.equals(permission));
     }
