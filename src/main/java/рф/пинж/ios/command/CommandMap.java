@@ -1,10 +1,18 @@
 package рф.пинж.ios.command;
 
 import рф.пинж.ios.Server;
-import рф.пинж.ios.command.defaults.HelpCommand;
-import рф.пинж.ios.command.defaults.VersionCommand;
+import рф.пинж.ios.command.defaults.*;
+import рф.пинж.ios.command.defaults.Anton.myPlan;
 import рф.пинж.ios.command.defaults.forum.TopicCommand;
+<<<<<<< HEAD
 import рф.пинж.ios.command.defaults.users.*;
+=======
+import рф.пинж.ios.command.defaults.users.AuthComand;
+import рф.пинж.ios.command.defaults.users.ChangePasswordCommand;
+import рф.пинж.ios.command.defaults.users.QuitCommand;
+import рф.пинж.ios.command.defaults.users.RestorePasswordCommand;
+import рф.пинж.ios.command.defaults.ilya.*;
+>>>>>>> master
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -26,13 +34,29 @@ public class CommandMap {
         this.register(new VersionCommand());
         this.register(new TopicCommand());
         this.register(new HelpCommand());
+
         this.register(new AuthComand());
         this.register(new QuitCommand());
         this.register(new RestorePasswordCommand());
         this.register(new ChangePasswordCommand());
+<<<<<<< HEAD
         this.register(new DeleteUserCommand());
         this.register(new ChangeUserDataCommand());
         this.register(new RegisterCommand());
+=======
+
+        this.register(new EduPlanCommand());
+        this.register(new SubjectCommand());
+        this.register(new AddSubjectInEduPlanCommand());
+        this.register(new ShowAllSubInEduPlanCommand());
+        this.register(new ProfilCommand());
+        this.register(new myPlan());
+        this.register(new InstitutesCommand());
+        this.register(new InstituteCommand());
+        this.register(new CathedrasCommand());
+        this.register(new CathedraCommand());
+        this.register(new DirectionsCommand());
+>>>>>>> master
     }
 
     public void register(Command command) {
