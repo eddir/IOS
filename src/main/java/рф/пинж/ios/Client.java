@@ -5,7 +5,9 @@ import рф.пинж.ios.model.prototype.users.User;
 import рф.пинж.ios.network.NetworkThread;
 import рф.пинж.ios.network.protocol.*;
 import рф.пинж.ios.view.View;
+import рф.пинж.ios.view.element.Input;
 import рф.пинж.ios.view.element.Interface;
+import рф.пинж.ios.view.element.Menu;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,8 +42,11 @@ public class Client implements CommandSender {
     }
 
     public void sendView(View view) {
-        if (view instanceof Interface) {
-            this.setAction("!interface");
+        if (view instanceof Menu) {
+            this.setAction("!menu");
+            this.currentInterface = (Interface) view;
+        } else if (view instanceof Input) {
+            this.setAction("!input");
             this.currentInterface = (Interface) view;
         }
 
@@ -64,6 +69,8 @@ public class Client implements CommandSender {
             }
         } else if (packet.getPid() == ProtocolInfo.MENU_PACKET) {
             this.currentInterface.handle(this, ((MenuPacket) packet).getChoice());
+        } else if (packet.getPid() == ProtocolInfo.INPUT_PACKET) {
+            this.currentInterface.handle(this, ((InputPacket) packet).getInput());
         } else {
             Server.getLogger().debug("Неизвестный пакет.");
         }
