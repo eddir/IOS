@@ -5,7 +5,10 @@ import рф.пинж.ios.command.defaults.HelpCommand;
 import рф.пинж.ios.command.defaults.VersionCommand;
 import рф.пинж.ios.command.defaults.directory.OpenDirectoryCommand;
 import рф.пинж.ios.command.defaults.forum.TopicCommand;
+import рф.пинж.ios.command.defaults.iosFile.DeleteFileCommand;
+import рф.пинж.ios.command.defaults.iosFile.GetFileCommand;
 import рф.пинж.ios.command.defaults.iosFile.OpenFileCommand;
+import рф.пинж.ios.command.defaults.iosFile.SetFileCommand;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -29,6 +32,9 @@ public class CommandMap {
         this.register(new HelpCommand());
         this.register(new OpenDirectoryCommand());
         this.register(new OpenFileCommand());
+        this.register(new DeleteFileCommand());
+        this.register(new GetFileCommand());
+        this.register(new SetFileCommand());
     }
 
     public void register(Command command) {

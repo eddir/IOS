@@ -15,6 +15,15 @@ public class IosFile extends Model implements IIosFile {
     private Integer idDirectory;
     private String url;
 
+    public IosFile() {}
+
+    public IosFile(String file_name, int idDirectory, String url) {
+        super();
+        this.file_name = file_name;
+        this.idDirectory = idDirectory;
+        this.url = url;
+    }
+
     @Override
     public String getFile_name() {
         return file_name;

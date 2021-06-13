@@ -25,13 +25,30 @@ public class IosFileController extends Controller {
                     IosFile currentFile = (new IosFileRepository()).get(Integer.parseInt(request));
 
                     put("../" + currentFile.getFile_name(), new CommandAction("openDirectory " + currentFile.getIdDirectory()));
-                    put("Удалить файл", null);
-                    put("Скачать файл", null);
+                    put("Удалить файл", new CommandAction("deleteFile " + currentFile.getId()));
+                    put("Получить ссылку на файл", new CommandAction("getFile " + currentFile.getId()));
                 } catch (Exception e) {
                     MainLogger.getLogger().error(e.getMessage());
                 }
             }
         });
         sender.sendView(menu);
+    }
+
+    @URL("url")
+    public void url (CommandSender sender, String request) {
+        try {
+            IosFile currentFile = (new IosFileRepository()).get(Integer.parseInt(request));
+
+            Menu menu = new Menu(new LinkedHashMap<>() {
+                {
+                    put("Назад", new CommandAction("openDirectory " + currentFile.getIdDirectory()));
+                }
+            });
+            sender.sendView(menu);
+            sender.sendMessage("Url: " + currentFile.getUrlFile());
+        } catch (Exception e) {
+            MainLogger.getLogger().error(e.getMessage());
+        }
     }
 }

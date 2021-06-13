@@ -42,7 +42,7 @@ public class DirectoryController extends Controller {
 
                     put("Удалить папку", null);
                     put("Добавить папку", null);
-                    put("Добавить файл", null);
+                    put("Добавить файл", new CommandAction("setFile " + currentDir.getId()));
                 } catch (Exception e) {
                     MainLogger.getLogger().error(e.getMessage());
                 }
