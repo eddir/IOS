@@ -4,12 +4,13 @@ import рф.пинж.ios.Server;
 import рф.пинж.ios.command.CommandSender;
 import рф.пинж.ios.controller.Controller;
 import рф.пинж.ios.controller.URL;
-import рф.пинж.ios.controller.action.*;
+import рф.пинж.ios.controller.action.Action;
+import рф.пинж.ios.controller.action.CommandAction;
+import рф.пинж.ios.controller.action.ViewAction;
 import рф.пинж.ios.model.prototype.forum.Topic;
 import рф.пинж.ios.permission.Permission;
 import рф.пинж.ios.repository.forum.TopicRepository;
 import рф.пинж.ios.view.defaults.forum.WelcomeView;
-import рф.пинж.ios.view.element.Input;
 import рф.пинж.ios.view.element.Menu;
 
 import java.util.LinkedHashMap;

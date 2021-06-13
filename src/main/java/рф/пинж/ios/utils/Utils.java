@@ -1,5 +1,11 @@
 package рф.пинж.ios.utils;
 
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.JsonNode;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
+import рф.пинж.ios.command.CommandSender;
+
 import java.io.*;
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadInfo;
@@ -8,6 +14,7 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -299,5 +306,50 @@ public class Utils {
             query_pairs.get(key).add(value);
         }
         return query_pairs;
+    }
+
+    public static JsonNode sendEmail(String recipientEmail, String subject, String text) throws UnirestException {
+
+        HttpResponse<JsonNode> request = Unirest.post("https://api.mailgun.net/v3/" + "mail.rostkov.pro" + "/messages")
+                .basicAuth("api", "a41ef4a4cf60a759ebb2b371113da9cc-90ac0eb7-1423a17f")
+                .field("from", "Техподдержка ИОС <postmaster@mail.rostkov.pro")
+                .field("to", recipientEmail)
+                .field("subject", subject)
+                .field("text", text)
+                .asJson();
+
+        return request.getBody();
+    }
+
+    public static String sha512Generator(String string) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-512");
+            byte[] hash = digest.digest(string.getBytes());
+            StringBuilder hashString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) hashString.append('0');
+                hashString.append(hex);
+            }
+            return hashString.toString();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public static boolean isValidPassword(String password) {
+        String pattern = "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9@#$%!]).{8,40}";
+        return password != null && password.matches(pattern);
+    }
+    public static boolean isValidPassword(String password, CommandSender sender) {
+        boolean isValid = isValidPassword(password);
+        if (!isValid) {
+            sender.sendMessage("Пароль должен содержать большие и маленькие заглавные буквы.");
+            sender.sendMessage("Хотя бы 1 цифру или один из спецсимволы '@', '#', '$', '%', '!'.");
+            sender.sendMessage("Длина пароля от 8 до 40 символов");
+        }
+        return isValid;
     }
 }
