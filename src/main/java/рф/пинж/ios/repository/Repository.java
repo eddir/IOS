@@ -10,6 +10,7 @@ import java.util.Collection;
 
 /**
  * Абстрактный ласс, в котором описана логика работы CRUD
+ *
  * @param <T> модель
  */
 public abstract class Repository<T extends IModel> implements IRepository<T> {
@@ -25,6 +26,10 @@ public abstract class Repository<T extends IModel> implements IRepository<T> {
         this.model = (Model) type.getDeclaredConstructor().newInstance();
     }
 
+    public Model getModel() {
+        return model;
+    }
+
     public T get(int id) {
         return Server.getInstance().getDatabase().createQuery("SELECT * FROM " + model.getTable() + " WHERE id=:id")
                 .addParameter("id", id)
@@ -38,17 +43,21 @@ public abstract class Repository<T extends IModel> implements IRepository<T> {
 
     public void save(T item) {
         StringBuilder query = new StringBuilder(
-                "insert into " + model.getTable() + "(" + String.join(",", model.getColumns()) + ") VALUES("
+                "INSERT INTO " + model.getTable() + "(" + String.join(",", model.getColumns()) + ") VALUES("
         );
 
-        for (String col: model.getColumns()) {
-            query.append(String.format(":%s,", col));
+        for (String col : model.getColumns()) {
+            if (col.equals("created_at") || col.equals("updated_at")) {
+                query.append("DEFAULT,");
+            } else {
+                query.append(String.format(":%s,", col));
+            }
         }
 
         query.deleteCharAt(query.length() - 1);
         query.append(") ON DUPLICATE KEY UPDATE ");
 
-        for (String col: model.getColumns()) {
+        for (String col : model.getColumns()) {
             query.append(String.format("%s=:%s,", col, col));
         }
 

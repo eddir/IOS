@@ -1,14 +1,16 @@
 package рф.пинж.ios.command;
 
 import рф.пинж.ios.Server;
-import рф.пинж.ios.command.defaults.HelpCommand;
-import рф.пинж.ios.command.defaults.VersionCommand;
+import рф.пинж.ios.command.defaults.*;
+import рф.пинж.ios.command.defaults.Anton.myPlan;
 import рф.пинж.ios.command.defaults.forum.TopicCommand;
 import рф.пинж.ios.command.defaults.users.AuthComand;
 import рф.пинж.ios.command.defaults.users.ChangePasswordCommand;
 import рф.пинж.ios.command.defaults.users.QuitCommand;
 import рф.пинж.ios.command.defaults.users.RestorePasswordCommand;
+import рф.пинж.ios.command.defaults.ilya.*;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,10 +30,23 @@ public class CommandMap {
         this.register(new VersionCommand());
         this.register(new TopicCommand());
         this.register(new HelpCommand());
+
         this.register(new AuthComand());
         this.register(new QuitCommand());
         this.register(new RestorePasswordCommand());
         this.register(new ChangePasswordCommand());
+
+        this.register(new EduPlanCommand());
+        this.register(new SubjectCommand());
+        this.register(new AddSubjectInEduPlanCommand());
+        this.register(new ShowAllSubInEduPlanCommand());
+        this.register(new ProfilCommand());
+        this.register(new myPlan());
+        this.register(new InstitutesCommand());
+        this.register(new InstituteCommand());
+        this.register(new CathedrasCommand());
+        this.register(new CathedraCommand());
+        this.register(new DirectionsCommand());
     }
 
     public void register(Command command) {
@@ -62,6 +77,18 @@ public class CommandMap {
         if (target == null) {
             return false;
         }
+
+        // Проверка прав
+        for (Method method : target.getClass().getMethods()) {
+            if ("execute".equals(method.getName())) {
+                if (!sender.getServer().testPermission(sender, method)) {
+                    sender.sendMessage("Недостаточно прав для выполнения этой команды.");
+                    return true;
+                }
+                break;
+            }
+        }
+
 
         try {
             target.execute(sender, sentCommandLabel, args);

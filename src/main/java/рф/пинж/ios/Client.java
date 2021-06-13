@@ -5,9 +5,13 @@ import рф.пинж.ios.model.prototype.users.User;
 import рф.пинж.ios.network.NetworkThread;
 import рф.пинж.ios.network.protocol.*;
 import рф.пинж.ios.view.View;
+import рф.пинж.ios.view.element.Input;
 import рф.пинж.ios.view.element.Interface;
+import рф.пинж.ios.view.element.Menu;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Client implements CommandSender {
@@ -24,10 +28,13 @@ public class Client implements CommandSender {
     private Interface currentInterface;
     private final Map<String, String> session = new HashMap<>();
 
+    private List<String> permissions = new ArrayList<>();
+
     public Client(Server server, NetworkThread thread, String ip) {
         this.server = server;
         this.thread = thread;
         this.ip = ip;
+        this.recalculatePermissions();
     }
 
     public void sendMessage(String message) {
@@ -35,8 +42,11 @@ public class Client implements CommandSender {
     }
 
     public void sendView(View view) {
-        if (view instanceof Interface) {
-            this.setAction("!interface");
+        if (view instanceof Menu) {
+            this.setAction("!menu");
+            this.currentInterface = (Interface) view;
+        } else if (view instanceof Input) {
+            this.setAction("!input");
             this.currentInterface = (Interface) view;
         }
 
@@ -45,13 +55,13 @@ public class Client implements CommandSender {
 
     public void handlePacket(DataPacket packet) {
         if (packet.getPid() == ProtocolInfo.COMMAND_PACKET) {
-            CommandPacket commandPacket = (CommandPacket)packet;
+            CommandPacket commandPacket = (CommandPacket) packet;
             Server.getLogger().debug("Принята команда.");
 
             if (!this.getServer().dispatchCommand(this, commandPacket.getCommand())) {
                 Server.getLogger().debug("При выполнении команды что-то пошло не так.");
             }
-        } else if(packet.getPid() == ProtocolInfo.VIEW_PACKET) {
+        } else if (packet.getPid() == ProtocolInfo.VIEW_PACKET) {
             ViewPacket viewPacket = (ViewPacket) packet;
             Server.getLogger().debug("Принято действие в UI.");
             if (!this.getServer().dispatchView(this, this.action.split("do=")[0] + viewPacket.getRequest())) {
@@ -59,6 +69,8 @@ public class Client implements CommandSender {
             }
         } else if (packet.getPid() == ProtocolInfo.MENU_PACKET) {
             this.currentInterface.handle(this, ((MenuPacket) packet).getChoice());
+        } else if (packet.getPid() == ProtocolInfo.INPUT_PACKET) {
+            this.currentInterface.handle(this, ((InputPacket) packet).getInput());
         } else {
             Server.getLogger().debug("Неизвестный пакет.");
         }
@@ -90,7 +102,6 @@ public class Client implements CommandSender {
         return ip;
     }
 
-
     @Override
     public User getUser() {
         return user;
@@ -99,5 +110,19 @@ public class Client implements CommandSender {
     @Override
     public void setUser(User user) {
         this.user = user;
+
+    @Override
+    public boolean hasPermission(String permission) {
+        return this.permissions.stream().anyMatch(s -> s.equals(permission));
+    }
+
+    @Override
+    public List<String> getEffectivePermissions() {
+        return new ArrayList<>(this.permissions);
+    }
+
+    @Override
+    public void recalculatePermissions() {
+        this.permissions = this.getServer().getDefaultPermissions(this);
     }
 }
