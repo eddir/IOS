@@ -36,4 +36,54 @@ public class CathedraRepository extends Repository<Institute> implements IReposi
         }
     }
 
+    private static Integer counterRecords() {
+        try {
+            Query query = Server.getInstance().getDatabase().createQuery("SELECT COUNT(id) FROM cathedras");
+            return query.executeScalar(Integer.class);
+        } catch (Sql2oException exception) {
+            MainLogger.getLogger().error(exception.getMessage());
+            return null;
+        }
+    }
+
+    public static Integer getNewId() {
+        return counterRecords() + 1;
+    }
+
+    public static String getTitle(int id) {
+        try {
+            Query query = Server.getInstance().getDatabase()
+                    .createQuery("SELECT title FROM cathedras WHERE id = " + id);
+
+            return query.executeScalar(String.class);
+
+        } catch (Sql2oException exception) {
+            MainLogger.getLogger().error(exception.getMessage());
+            return null;
+        }
+    }
+
+    public static boolean insertNewCathedra(int temp, String title, int idi) {
+        try {
+            Query query = Server.getInstance().getDatabase().createQuery("INSERT INTO cathedras (id, title, idInst, idHead) " +
+                    "VALUES (" + temp + ", \"" + title + "\", " + idi + ", NULL)");
+            query.executeUpdate();
+            return true;
+        } catch (Sql2oException exception) {
+            MainLogger.getLogger().error(exception.getMessage());
+            return false;
+        }
+    }
+
+    public static boolean deleteCathedra(int id) {
+        try {
+            Query query = Server.getInstance().getDatabase()
+                    .createQuery("DELETE FROM cathedras WHERE id = " + id);
+            query.executeUpdate();
+            return true;
+        } catch (Sql2oException exception) {
+            MainLogger.getLogger().error(exception.getMessage());
+            return false;
+        }
+    }
 }

@@ -2,7 +2,6 @@ package рф.пинж.ios.command.defaults.ilya;
 
 import рф.пинж.ios.command.Command;
 import рф.пинж.ios.command.CommandSender;
-import рф.пинж.ios.controller.defaults.ilya.InstituteController;
 import рф.пинж.ios.model.prototype.ilya.Cathedra;
 import рф.пинж.ios.model.prototype.ilya.Institute;
 

@@ -30,7 +30,7 @@ public class Institute extends Model {
             this.cathedras.add(new Cathedra(value, this));
         }
 
-        //TODO: продумать директора
+        //TODO: коннект с Саньком
         this.director = null;
     }
 
@@ -61,10 +61,20 @@ public class Institute extends Model {
         this.director = director;
     }
 
-    /**
-     * Красивое формировение всех институтов в список
-     * @return Список всех институтов
-     */
+    // Добавление кафедры
+    public boolean addCathedra(Cathedra cathedra) {
+        this.cathedras.add(cathedra);
+        CathedraRepository.insertNewCathedra(cathedra.getId(), cathedra.getTitle(), cathedra.getInstitute().getId());
+        return true;
+    }
+
+    public boolean removeCathedra(int id) {
+        int temp = this.cathedras.size();
+        this.cathedras.remove(CathedraRepository.getTitle(id));
+        CathedraRepository.deleteCathedra(id);
+        return true;
+    }
+
     public static String titlesToString() {
 
         List<String> temp = InstituteRepository.getAllTitles();
@@ -76,11 +86,6 @@ public class Institute extends Model {
         }
 
         return str.toString();
-    }
-
-    @Override
-    public String toString() {
-        return id + " " + title + " " + abbreviation;
     }
 }
 
