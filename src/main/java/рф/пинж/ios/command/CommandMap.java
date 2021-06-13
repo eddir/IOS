@@ -1,8 +1,8 @@
 package рф.пинж.ios.command;
 
 import рф.пинж.ios.Server;
-import рф.пинж.ios.command.defaults.HelpCommand;
-import рф.пинж.ios.command.defaults.VersionCommand;
+import рф.пинж.ios.command.defaults.*;
+import рф.пинж.ios.command.defaults.Anton.myPlan;
 import рф.пинж.ios.command.defaults.forum.TopicCommand;
 import рф.пинж.ios.command.defaults.ilya.*;
 
@@ -26,6 +26,12 @@ public class CommandMap {
         this.register(new VersionCommand());
         this.register(new TopicCommand());
         this.register(new HelpCommand());
+        this.register(new EduPlanCommand());
+        this.register(new SubjectCommand());
+        this.register(new AddSubjectInEduPlanCommand());
+        this.register(new ShowAllSubInEduPlanCommand());
+        this.register(new ProfilCommand());
+        this.register(new myPlan());
         this.register(new InstitutesCommand());
         this.register(new InstituteCommand());
         this.register(new CathedrasCommand());
