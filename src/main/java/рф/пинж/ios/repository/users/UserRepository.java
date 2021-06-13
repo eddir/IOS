@@ -10,6 +10,8 @@ import рф.пинж.ios.utils.MainLogger;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
+import static рф.пинж.ios.utils.Utils.sha512Generator;
+
 public class UserRepository extends Repository<User> implements IRepository<User> {
     public UserRepository() throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         super(User.class);
@@ -71,34 +73,13 @@ public class UserRepository extends Repository<User> implements IRepository<User
     }
 
     public static void changeUserPassword (String login, String password) throws Exception {
-        String hashPassword = User.sha512Generator(password);
+        String hashPassword = sha512Generator(password);
         Query updatePassword = Server.getInstance().getDatabase().createQuery(
                 "UPDATE users " +
                         "SET password = '" + hashPassword + "' " +
                         "WHERE login = '" + login + "'"
         );
         updatePassword.executeUpdate();
-
-
-//        Properties properties = System.getProperties();
-//        properties.setProperty("mail.transport.protocol", "smtps");
-//        properties.setProperty("mail.smtps.auth", "true");
-//        properties.setProperty("mail.smtps.host", "smtp.gmail.com");
-//        properties.setProperty("mail.smtps.user", "ios.sstu.ru@gmail.com");
-//
-//        Session mailSession = Session.getDefaultInstance(properties);
-//        MimeMessage message = new MimeMessage(mailSession);
-//        message.setFrom(new InternetAddress("ios.sstu.ru@gmail.com"));
-//        message.addRecipients(Message.RecipientType.TO, new InternetAddress[]{new InternetAddress(getEmailByLogin(login))});
-//        message.setSubject("Ваш пароль был изменён");
-//        message.setText("Ваш новый пароль для входа в ИОС: " + password);
-//
-//        Transport transport = mailSession.getTransport();
-//        transport.connect("ios.sstu.ru@gmail.com", "20012308");
-//        transport.sendMessage(message, message.getAllRecipients());
-//        transport.close();
-//
-//        System.out.println(password);
     }
 
     public static void registerNewUser() {
