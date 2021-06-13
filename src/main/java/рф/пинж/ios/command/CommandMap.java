@@ -4,6 +4,10 @@ import рф.пинж.ios.Server;
 import рф.пинж.ios.command.defaults.*;
 import рф.пинж.ios.command.defaults.Anton.myPlan;
 import рф.пинж.ios.command.defaults.forum.TopicCommand;
+import рф.пинж.ios.command.defaults.users.AuthComand;
+import рф.пинж.ios.command.defaults.users.ChangePasswordCommand;
+import рф.пинж.ios.command.defaults.users.QuitCommand;
+import рф.пинж.ios.command.defaults.users.RestorePasswordCommand;
 import рф.пинж.ios.command.defaults.ilya.*;
 
 import java.lang.reflect.Method;
@@ -26,6 +30,12 @@ public class CommandMap {
         this.register(new VersionCommand());
         this.register(new TopicCommand());
         this.register(new HelpCommand());
+
+        this.register(new AuthComand());
+        this.register(new QuitCommand());
+        this.register(new RestorePasswordCommand());
+        this.register(new ChangePasswordCommand());
+
         this.register(new EduPlanCommand());
         this.register(new SubjectCommand());
         this.register(new AddSubjectInEduPlanCommand());
