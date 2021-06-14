@@ -19,4 +19,12 @@ public class IosFileRepository extends Repository<IosFile> implements IRepositor
         return Server.getInstance().getDatabase().createQuery("SELECT * FROM files WHERE idDirectory = " + idDirectory)
                 .executeAndFetch(IosFile.class);
     }
+
+    public void saveFile(IosFile file) {
+        Query query = Server.getInstance().getDatabase().createQuery("INSERT INTO files (file_name, idDirectory, url) VALUES (" +
+                "\'" + file.getFile_name() + "\', " +
+                file.getIdDirectory() + ", " +
+                "\'" + file.getUrlFile() + "\')");
+        query.executeUpdate();
+    }
 }

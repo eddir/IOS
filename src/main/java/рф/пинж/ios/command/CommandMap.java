@@ -38,6 +38,7 @@ public class CommandMap {
         this.register(new VersionCommand());
         this.register(new TopicCommand());
         this.register(new HelpCommand());
+
         this.register(new OpenDirectoryCommand());
         this.register(new OpenFileCommand());
         this.register(new DeleteFileCommand());
@@ -49,7 +50,7 @@ public class CommandMap {
         this.register(new RestorePasswordCommand());
         this.register(new ChangePasswordCommand());
         this.register(new DeleteUserCommand());
-        this.register(new ChangeUserDataCommand());
+//        this.register(new ChangeUserDataCommand());
         this.register(new RegisterCommand());
 
         this.register(new EduPlanCommand());
