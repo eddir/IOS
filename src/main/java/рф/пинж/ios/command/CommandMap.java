@@ -1,9 +1,18 @@
 package рф.пинж.ios.command;
 
 import рф.пинж.ios.Server;
+import рф.пинж.ios.command.defaults.HelpCommand;
+import рф.пинж.ios.command.defaults.VersionCommand;
+import рф.пинж.ios.command.defaults.directory.CreateDirectoryCommand;
+import рф.пинж.ios.command.defaults.directory.DeleteDirectoryCommand;
+import рф.пинж.ios.command.defaults.directory.OpenDirectoryCommand;
 import рф.пинж.ios.command.defaults.*;
 import рф.пинж.ios.command.defaults.Anton.myPlan;
 import рф.пинж.ios.command.defaults.forum.TopicCommand;
+import рф.пинж.ios.command.defaults.iosFile.DeleteFileCommand;
+import рф.пинж.ios.command.defaults.iosFile.GetFileCommand;
+import рф.пинж.ios.command.defaults.iosFile.OpenFileCommand;
+import рф.пинж.ios.command.defaults.iosFile.CreateFileCommand;
 import рф.пинж.ios.command.defaults.users.*;
 import рф.пинж.ios.command.defaults.users.AuthComand;
 import рф.пинж.ios.command.defaults.users.ChangePasswordCommand;
@@ -31,6 +40,14 @@ public class CommandMap {
         this.register(new VersionCommand());
         this.register(new TopicCommand());
         this.register(new HelpCommand());
+
+        this.register(new OpenDirectoryCommand());
+        this.register(new DeleteDirectoryCommand());
+        this.register(new CreateDirectoryCommand());
+        this.register(new OpenFileCommand());
+        this.register(new DeleteFileCommand());
+        this.register(new GetFileCommand());
+        this.register(new CreateFileCommand());
 
         this.register(new AuthComand());
         this.register(new QuitCommand());
